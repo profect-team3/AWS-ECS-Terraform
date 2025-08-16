@@ -7,11 +7,20 @@ module "vpc" {
   tags    = var.tags
 }
 
-module "subnet" {
-  source = "./modules/subnet"
+module "public_subnet" {
+  source = "./modules/network/subnet"
   vpc_id = module.vpc.vpc_id
-  cidr   = var.subnet_cidr
+  cidr   = var.public_subnet_cidr
   azs    = var.availability_zones
   public = true
+  tags   = var.tags
+}
+
+module "private_subnet" {
+  source = "./modules/network/subnet"
+  vpc_id = module.vpc.vpc_id
+  cidr   = var.private_subnet_cidr
+  azs    = var.availability_zones
+  public = false
   tags   = var.tags
 }
