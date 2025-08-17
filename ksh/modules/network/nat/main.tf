@@ -1,14 +1,11 @@
 resource "aws_nat_gateway" "nat" {
   count = length(var.availability_zones)
-  allocation_id = var.nat_eip_allocation_id[count.index]
   subnet_id = var.private_subnet_id[count.index]
-
   tags = merge(var.common_tags, {Name = "${var.project_name}-nat-${count.index + 1}"})
 }
 
 resource "aws_route_table" "private" {
   vpc_id = var.vpc_id
-
   tags = merge(var.common_tags, {
     Name = "${var.project_name}-nat-${count.index + 1}"
   })

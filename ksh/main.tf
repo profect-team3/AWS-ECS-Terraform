@@ -47,7 +47,6 @@ module "private_nat" {
   source = "./modules/network/nat"
   vpc_id = var.vpc_id
   private_subnet_id = var.private_subnet_id
-  nat_eip_allocation_id = var.nat_eip_allocation_id
   availability_zones = var.availability_zones
   project_name = var.project_name
   common_tags = var.tags
