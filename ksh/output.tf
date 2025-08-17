@@ -13,3 +13,7 @@ output "private_subnet_id" {
 output "igw_id" {
   value = module.igw.igw_id
 }
+
+output "public_route_table_id" {
+  value = module.public_route_table.route_table_id
+}

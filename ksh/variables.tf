@@ -30,3 +30,12 @@ variable "private_subnet_cidr" {
 variable "availability_zones"{
   type = list(string)
 }
+
+variable "vpc_id" {}
+variable "igw_id" {}
+variable "public_subnet_id" {}
+variable "project_name" {}
+variable "common_tags" {
+  type = map(string)
+  default = {}
+}
