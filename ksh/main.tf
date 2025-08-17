@@ -1,4 +1,3 @@
-# VPC
 module "vpc" {
   source  = "./modules/network/vpc"
   project = var.project
@@ -23,4 +22,9 @@ module "private_subnet" {
   azs    = var.availability_zones
   public = false
   tags   = var.tags
+}
+
+module "igw" {
+  source = "./modules/network/igw"
+  vpc_id = module.vpc.vpc_id
 }
