@@ -39,3 +39,9 @@ output "sg_public_id" {
 output "sg_private_id" {
   value = module.sg.sg_private_id
 }
+
+#VPC Endpoint (S3)
+output "vpc_endpoint_s3_id" {
+  value = module.vpc_endpoint_s3.s3_vpc_endpoint_id
+  description = "Private Subnet S3 - VPC Endpoint ID"
+}
