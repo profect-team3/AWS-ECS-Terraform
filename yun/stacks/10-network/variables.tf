@@ -1,18 +1,7 @@
-# global
-variable "project" {
-  description = "프로젝트 식별자 (ex: order-platform)"
-  type        = string
-}
-variable "env" {
-  description = "환경 이름 (ex: test, prod)"
-  type        = string
-}
-# variable "region" {
-#   description = "AWS 리전"
-#   type        = string
-# }
+variable "project"             { type = string }
+variable "env"                 { type = string }
+variable "region"              { type = string }
 variable "tags" {
-  description = "공통 태그 맵"
   type        = map(string)
   default     = {}
 }
