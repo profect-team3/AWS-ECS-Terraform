@@ -1,4 +1,4 @@
-variable "project" {
+variable "project_name" {
   type = string
 }
 variable "env" {
@@ -6,6 +6,7 @@ variable "env" {
 }
 variable "region" {
   type = string
+  default = "ap-northeast-2"
 }
 variable "tags" {
   type    = map(string)
@@ -13,6 +14,7 @@ variable "tags" {
 }
 variable "vpc_cidr" {
   type = string
+  default = "10.0.0.0/16"
   validation {
     condition     = can(cidrnetmask(var.vpc_cidr))
     error_message = "NotValid CIDR block"
@@ -37,7 +39,6 @@ variable "vpc_id" {
 
 variable "igw_id" {}
 variable "public_subnet_id" {}
-variable "project_name" {}
 variable "common_tags" {
   type = map(string)
   default = {}
@@ -50,4 +51,9 @@ variable "private_subnet_id" {
 variable "nat_eip_allocation_id" {
   type = list(string)
   description = "EIP allocation ID - NAT Gateway"
+}
+
+variable "my_ip" {
+  type = string
+  description = "IP - SSH Access"
 }
