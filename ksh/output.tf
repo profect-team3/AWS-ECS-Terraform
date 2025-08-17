@@ -45,3 +45,20 @@ output "vpc_endpoint_s3_id" {
   value = module.vpc_endpoint_s3.s3_vpc_endpoint_id
   description = "Private Subnet S3 - VPC Endpoint ID"
 }
+
+#IAM
+output "iam_admin_group_id" {
+  value = module.iam.admin_group_id
+}
+
+output "iam_users" {
+  value = module.iam.iam_users
+}
+
+output "iam_roles" {
+  value = module.iam.roles
+}
+
+output "iam_policies" {
+  value = module.iam.policies
+}

@@ -69,3 +69,11 @@ module "vpc_endpoint_s3" {
   project_name = var.project_name
   common_tags = var.tags
 }
+
+#IAM
+module "iam" {
+  source = "./modules/iam"
+  project_name = var.project_name
+  env = var.env
+  tags = var.tags
+}
