@@ -3,11 +3,6 @@ variable "project_name" {
   default = "Goorm3-project"
 }
 
-variable "env" {
-  type = string
-  default = "dev"
-}
-
 variable "tags" {
   type = map(string)
   default = {
