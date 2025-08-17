@@ -73,3 +73,15 @@ module "mongo" {
 
   tags        = local.tags
 }
+
+# # Postgres 접근 허용
+# resource "aws_security_group_rule" "ecs_to_postgres" {
+#   type                     = "ingress"
+#   security_group_id        = data.terraform_remote_state.data.outputs.postgres_sg_ids["0"] # 키는 환경에 따라
+#   from_port                = 5432
+#   to_port                  = 5432
+#   protocol                 = "tcp"
+#   source_security_group_id = var.ecs_service_sg_id
+# }
+
+# Redis, Mongo도 동일 패턴으로 추가

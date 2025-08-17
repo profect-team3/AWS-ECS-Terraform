@@ -35,13 +35,13 @@ module "ecs_cluster" {
 }
 
 # ECS Services (다중)
-# module "ecs_service" {
-#   source                 = "../../modules/compute/ecs-service"
-#   name                   = local.name
-#   cluster_id             = module.ecs_cluster.id
-#   subnet_ids             = local.private_subnet_ids
-#   security_group_ids     = var.service_security_group_ids
-#   services               = var.services
-#   enable_execute_command = var.enable_execute_command
-#   log_retention_days     = var.log_retention_days
-# }
+module "ecs_service" {
+  source                 = "../../modules/compute/ecs-service"
+  name                   = local.name
+  cluster_id             = module.ecs_cluster.id
+  subnet_ids             = local.private_subnet_ids
+  security_group_ids     = var.service_security_group_ids
+  services               = var.services
+  enable_execute_command = var.enable_execute_command
+  log_retention_days     = var.log_retention_days
+}
