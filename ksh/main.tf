@@ -59,3 +59,13 @@ module "sg" {
   vpc_id = module.vpc.vpc_id
   my_ip = var.my_ip
 }
+
+#VPC Endpoint (S3)
+module "vpc_endpoint_s3" {
+  source = "./modules/network/vpcendpoint"
+  vpc_id = module.vpc.vpc_id
+  private_route_table_ids = [module.private_nat.private_route_table_id]
+  service_name = "com.amazonaws.ap-northeast-2.s3"
+  project_name = var.project_name
+  common_tags = var.tags
+}
