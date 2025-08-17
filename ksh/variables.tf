@@ -31,11 +31,23 @@ variable "availability_zones"{
   type = list(string)
 }
 
-variable "vpc_id" {}
+variable "vpc_id" {
+  type = string
+}
+
 variable "igw_id" {}
 variable "public_subnet_id" {}
 variable "project_name" {}
 variable "common_tags" {
   type = map(string)
   default = {}
+}
+
+variable "private_subnet_id" {
+  type = list(string)
+}
+
+variable "nat_eip_allocation_id" {
+  type = list(string)
+  description = "EIP allocation ID - NAT Gateway"
 }
