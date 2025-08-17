@@ -1,15 +1,17 @@
-data "terraform_remote_state" "network" {
-  backend = "local"
-  config = {
-    path = "${path.module}/../10-network/terraform.tfstate"  # ← 10-network의 state 파일 경로
-  }
-}
+# data "terraform_remote_state" "network" {
+#   backend = "local"
+#   config = {
+#     path = "${path.module}/../10-network/terraform.tfstate"
+#   }
+# }
 
 locals {
   name = "${var.project}-${var.env}"
   tags = merge(var.tags, { Project = var.project, Env = var.env })
-  vpc_id = data.terraform_remote_state.network.outputs.vpc_id
-  private_subnet_ids = data.terraform_remote_state.network.outputs.private_subnet_ids
+  # vpc_id = data.terraform_remote_state.network.outputs.vpc_id
+  # private_subnet_ids = data.terraform_remote_state.network.outputs.private_subnet_ids
+  vpc_id = "vpc-xxxxxxxx"
+  private_subnet_ids = ["subnet-xxxxxxxxxxxxxxxxx"]
 }
 
 # PostgreSQL
