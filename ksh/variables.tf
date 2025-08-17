@@ -48,11 +48,6 @@ variable "private_subnet_id" {
   type = list(string)
 }
 
-variable "nat_eip_allocation_id" {
-  type = list(string)
-  description = "EIP allocation ID - NAT Gateway"
-}
-
 variable "my_ip" {
   type = string
   description = "IP - SSH Access"

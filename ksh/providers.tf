@@ -13,7 +13,7 @@ provider "aws" {
 
   default_tags {
     tags = merge({
-      Project = var.project
+      Project = var.project_name
       Env     = var.env
     }, var.tags)
   }
