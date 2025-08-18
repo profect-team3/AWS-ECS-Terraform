@@ -1,3 +1,8 @@
-output "repository_arn"  { value = aws_ecr_repository.this.arn }
-output "repository_url"  { value = aws_ecr_repository.this.repository_url }
-output "repository_name" { value = aws_ecr_repository.this.name }
+output "repository_urls" {
+  description = "서비스별 ECR 리포지토리 URL"
+  value       = { for k, r in aws_ecr_repository.this : k => r.repository_url }
+}
+
+output "repository_arns" {
+  value = { for k, r in aws_ecr_repository.this : k => r.arn }
+}

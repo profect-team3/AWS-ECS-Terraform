@@ -1,5 +1,6 @@
 resource "aws_ecr_repository" "this" {
-  name                 = var.repository_name
+  for_each             = toset(var.repositories)
+  name                 = "${var.name}-ecr-${each.key}"
   image_tag_mutability = var.image_mutability
 
   # true: 이미지를 push할 때 AWS ECR이 보안 스캔을 자동 실행
@@ -17,10 +18,9 @@ resource "aws_ecr_repository" "this" {
 }
 
 # Lifecycle Policy: latest 태그 보존 + 최근 2개 이미지 보존
-
-
 resource "aws_ecr_lifecycle_policy" "this" {
-  repository = aws_ecr_repository.this.name
+  for_each             = toset(var.repositories)
+  repository = aws_ecr_repository.this[each.key].name
 
   policy = jsonencode({
     rules = concat(
