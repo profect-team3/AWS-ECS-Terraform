@@ -4,10 +4,12 @@ variable "tags" {
   default = {}
 }
 
+
+variable "vpc_id" { type = string }
 variable "subnet_ids" { type = list(string) }
-variable "listener_port" {
-  type = number
-  default = 80
+
+variable "listener_ports" {
+  type    = list(number)
+  default = []
 }
 variable "alb_arn" { type = string }
-

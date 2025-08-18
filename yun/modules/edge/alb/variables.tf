@@ -17,30 +17,23 @@ variable "allowed_sg_ids"{
   default = []
 }
 
-variable "listener_port"     {
-  type = number
-  default = 80
-}
-variable "listener_protocol" {
-  type = string
-  default = "HTTP"
+# variable "alb_certificate_arn" {
+#   description = "내부 ALB에서 TLS 종단 시 사용할 ACM 인증서(선택, 있으면 HTTPS 리스너 생성)"
+#   type        = string
+#   default     = null
+# }
+
+variable "health_check_path" {
+  description = "공통 헬스체크 경로"
+  type        = string
+  default     = "/health"
 }
 
-# 서비스별 TargetGroup + Path 라우팅
-variable "target_groups" {
-  type = list(object({
-    name          = string
-    port          = number
-    protocol      = string              # HTTP/HTTPS
-    path_patterns = list(string)
-    health_check  = optional(object({
-      enabled             = optional(bool, true)
-      path                = optional(string, "/health")
-      healthy_threshold   = optional(number, 2)
-      unhealthy_threshold = optional(number, 2)
-      interval            = optional(number, 30)
-      timeout             = optional(number, 5)
-      matcher             = optional(string, "200-399")
-    }), {})
+variable "services" {
+  description = "서비스별 포트와 라우팅 경로"
+  type = map(object({
+    port  = number
+    paths = list(string)
   }))
 }
+
