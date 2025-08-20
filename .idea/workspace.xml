@@ -4,118 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16bd0dad-279e-4079-9401-5de331a8bd87" name="Changes" comment="chore(terraform): 디렉토리 구조 변경">
+    <list default="true" id="16bd0dad-279e-4079-9401-5de331a8bd87" name="Changes" comment="feat(terraform): compute 수정&#10;- ecs task definitions 추가">
+      <change afterPath="$PROJECT_DIR$/modules/compute/ecs-task-definition/main.tf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/compute/ecs-task-definition/output.tf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/compute/ecs-task-definition/variables.tf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stacks/55-compute-service/main.tf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stacks/55-compute-service/output.tf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stacks/55-compute-service/variables.tf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/environments/test/backend.tf" beforeDir="false" afterPath="$PROJECT_DIR$/environments/test/backend.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/.terraform.lock.hcl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/main.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/iam/main.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/iam/output.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/iam/variables.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/igw/main.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/igw/output.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/igw/variables.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/nat/main.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/nat/output.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/nat/variables.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/routetable/main.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/routetable/output.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/routetable/variables.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/sg/main.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/sg/output.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/sg/variables.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/subnet/main.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/subnet/output.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/subnet/variables.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/vpc/main.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/vpc/output.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/vpc/variables.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/vpcendpoint/main.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/vpcendpoint/output.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/modules/network/vpcendpoint/variables.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/output.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/providers.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ksh/variables.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/network/main.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/network/outputs.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/network/variables.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/network/vpc/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/vpc/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/network/vpc/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/vpc/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/network/vpc/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/vpc/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/environments/test/backend.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/api/apigw/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/api/apigw/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/api/apigw/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/api/apigw/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/api/apigw/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/api/apigw/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/api/route53/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/api/route53/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/api/route53/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/api/route53/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/api/route53/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/api/route53/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/api/waf/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/api/waf/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/api/waf/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/api/waf/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/api/waf/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/api/waf/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/compute/ecr/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecr/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/compute/ecr/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecr/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/compute/ecr/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecr/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/compute/ecs-cluster/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecs-cluster/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/compute/ecs-cluster/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecs-cluster/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/compute/ecs-cluster/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecs-cluster/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/compute/ecs-service/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecs-service/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/compute/ecs-service/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecs-service/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/compute/ecs-service/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecs-service/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/data/ec2-mongo/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-mongo/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/data/ec2-mongo/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-mongo/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/data/ec2-mongo/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-mongo/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/data/ec2-postgres/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-postgres/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/data/ec2-postgres/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-postgres/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/data/ec2-postgres/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-postgres/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/data/ec2-redis/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-redis/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/data/ec2-redis/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-redis/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/data/ec2-redis/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-redis/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/edge/alb/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/edge/alb/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/edge/alb/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/edge/alb/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/edge/alb/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/edge/alb/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/edge/nlb/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/edge/nlb/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/edge/nlb/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/edge/nlb/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/edge/nlb/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/edge/nlb/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/network/igw-nat/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/igw-nat/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/network/igw-nat/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/igw-nat/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/network/igw-nat/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/igw-nat/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/network/subnets/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/subnets/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/network/subnets/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/subnets/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/network/subnets/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/subnets/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/network/vpc/main.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/network/vpc/output.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/network/vpc/variables.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/s3/state-bucket/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/s3/state-bucket/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/s3/state-bucket/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/s3/state-bucket/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/s3/state-bucket/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/s3/state-bucket/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/security/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/security/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/security/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/security/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/modules/security/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/security/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/providers.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/00-bootstrap/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/00-bootstrap/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/00-bootstrap/variable.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/00-bootstrap/variable.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/10-network/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/10-network/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/10-network/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/10-network/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/10-network/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/10-network/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/20-security/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/20-security/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/20-security/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/20-security/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/20-security/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/20-security/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/30-data/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/30-data/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/30-data/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/40-edge/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/40-edge/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/40-edge/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/40-edge/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/40-edge/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/40-edge/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/50-compute/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/50-compute/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/50-compute/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/50-compute/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/50-compute/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/50-compute/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/60-API/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/60-API/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/60-API/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/60-API/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/stacks/60-API/variable.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/60-API/variable.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yun/variables.tf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/compute/ecs-service/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecs-service/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/compute/ecs-service/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecs-service/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/50-compute/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/50-compute/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/50-compute/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/50-compute/output.tf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +51,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "feat/#10-terraform",
-    "last_opened_file_path": "/Users/jungyunjoo/IdeaProjects/goorm/AWS-Terraform",
+    "last_opened_file_path": "/Users/jungyunjoo/IdeaProjects/goorm/AWS-Terraform/modules/compute",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -163,15 +63,30 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/modules/compute" />
+      <recent name="$PROJECT_DIR$/stacks/55-compute-service" />
+      <recent name="$PROJECT_DIR$/modules/compute-service" />
+      <recent name="$PROJECT_DIR$/stacks" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/yun/modules/api" />
-      <recent name="$PROJECT_DIR$/yun/stacks/20-security" />
-      <recent name="$PROJECT_DIR$/yun/modules/security" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/modules/security/security-group" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/yun/modules/api" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="AWS-Terraform" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="AWS-Terraform" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -188,7 +103,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1755483482009</updated>
-      <workItem from="1755483483071" duration="45118000" />
+      <workItem from="1755483483071" duration="45502000" />
+      <workItem from="1755672600362" duration="10655000" />
     </task>
     <task id="LOCAL-00001" summary="feat(terraform): edge 테스트 완료&#10;- nlb, alb, API Gateway&#10;- route53, waf 이후 추가">
       <option name="closed" value="true" />
@@ -270,7 +186,39 @@
       <option name="project" value="LOCAL" />
       <updated>1755671541414</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="chore(terraform): 통합&#10;- 기존 예시 파일 삭제&#10;- compute output 변수명 수정">
+      <option name="closed" value="true" />
+      <created>1755672030215</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1755672030215</updated>
+    </task>
+    <task id="LOCAL-00012" summary="chore(terraform): 통합&#10;- compute output 변수명 수정">
+      <option name="closed" value="true" />
+      <created>1755672138386</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1755672138386</updated>
+    </task>
+    <task id="LOCAL-00013" summary="feat(terraform): security 수정&#10;- security_group 분리&#10;- iam 추가&#10;  - ecs_task_execution_role&#10;  - ecs_task_role">
+      <option name="closed" value="true" />
+      <created>1755680283779</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1755680283779</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat(terraform): compute 수정&#10;- ecs task definitions 추가">
+      <option name="closed" value="true" />
+      <created>1755684102457</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1755684102457</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,6 +259,10 @@
     <MESSAGE value="chore(terraform): repositories 변수 추가&#10;- ECR repo 하나로 통합" />
     <MESSAGE value="chore(terraform): compute 수정&#10;- iam 디렉토리 삭제&#10;- ecs service 주석&#10;- ecs cluster output.tf 수정" />
     <MESSAGE value="chore(terraform): 디렉토리 구조 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore(terraform): 디렉토리 구조 변경" />
+    <MESSAGE value="chore(terraform): 통합&#10;- 기존 예시 파일 삭제&#10;- compute output 변수명 수정" />
+    <MESSAGE value="chore(terraform): 통합&#10;- compute output 변수명 수정" />
+    <MESSAGE value="feat(terraform): security 수정&#10;- security_group 분리&#10;- iam 추가&#10;  - ecs_task_execution_role&#10;  - ecs_task_role" />
+    <MESSAGE value="feat(terraform): compute 수정&#10;- ecs task definitions 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(terraform): compute 수정&#10;- ecs task definitions 추가" />
   </component>
 </project>
