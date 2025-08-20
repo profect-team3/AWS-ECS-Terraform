@@ -18,7 +18,7 @@ locals {
 module "ecr" {
   source            = "../../modules/compute/ecr"
   name              = local.name
-  repositories      = var.api_services
+  repositories      = var.repositories
   image_mutability  = var.image_mutability
   # scan_on_push     = var.scan_on_push
   # encryption_type  = var.encryption_type
@@ -45,43 +45,43 @@ module "ecs_cluster" {
 #   enable_execute_command = var.enable_execute_command
 #   log_retention_days     = var.log_retention_days
 # }
-
-module "iam" {
-  source   = "../../modules/compute/iam"
-  name     = local.name
-  region   = var.region
-  services = var.api_services
-
-  # Execution Role 전략
-  create_execution_role_per_service = true
-  exec_extra_policy_arns = []
-
-  # (선택) secrets/parameters 권한
-  # exec_secret_arns = {
-  #   user  = ["arn:aws:secretsmanager:ap-northeast-2:123456789012:secret:user/*"]
-  #   auth  = ["arn:aws:ssm:ap-northeast-2:123456789012:parameter/auth/*"]
-  # }
-  # exec_secret_arns_global   = []  # 모든 서비스 공통
-  # exec_kms_key_arns         = {}  # { user=["arn:aws:kms:..:key/.."], ... }
-  # exec_kms_key_arns_global  = []  # 공통 KMS 키
-
-  # Task Role 권한
-  task_role_policy_arns = {
-    user  = ["arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"]
-    order = ["arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess"]
-  }
-
-  task_role_inline_policies = {
-    payment = jsonencode({
-      Version = "2012-10-17",
-      Statement = [{
-        Effect = "Allow",
-        Action = ["sqs:SendMessage"],
-        Resource = ["arn:aws:sqs:ap-northeast-2:123456789012:payments-*"]
-      }]
-    })
-  }
-
-  # permissions_boundary_arn = "arn:aws:iam::123456789012:policy/Boundary/ecs-boundary"
-  tags = var.tags
-}
+#
+# module "iam" {
+#   source   = "../../modules/compute/iam"
+#   name     = local.name
+#   region   = var.region
+#   services = var.api_services
+#
+#   # Execution Role 전략
+#   create_execution_role_per_service = true
+#   exec_extra_policy_arns = []
+#
+#   # (선택) secrets/parameters 권한
+#   # exec_secret_arns = {
+#   #   user  = ["arn:aws:secretsmanager:ap-northeast-2:123456789012:secret:user/*"]
+#   #   auth  = ["arn:aws:ssm:ap-northeast-2:123456789012:parameter/auth/*"]
+#   # }
+#   # exec_secret_arns_global   = []  # 모든 서비스 공통
+#   # exec_kms_key_arns         = {}  # { user=["arn:aws:kms:..:key/.."], ... }
+#   # exec_kms_key_arns_global  = []  # 공통 KMS 키
+#
+#   # Task Role 권한
+#   task_role_policy_arns = {
+#     user  = ["arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"]
+#     order = ["arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess"]
+#   }
+#
+#   task_role_inline_policies = {
+#     payment = jsonencode({
+#       Version = "2012-10-17",
+#       Statement = [{
+#         Effect = "Allow",
+#         Action = ["sqs:SendMessage"],
+#         Resource = ["arn:aws:sqs:ap-northeast-2:123456789012:payments-*"]
+#       }]
+#     })
+#   }
+#
+#   # permissions_boundary_arn = "arn:aws:iam::123456789012:policy/Boundary/ecs-boundary"
+#   tags = var.tags
+# }
