@@ -1,16 +1,7 @@
-variable "project" {
-  type = string
-}
-
-variable "env" {
-  type = string
-}
-
-variable "cidr" {
-  type = string
-}
-
+variable "name" { type = string }
 variable "tags" {
-  type    = map(string)
+  type = map(string)
   default = {}
 }
+
+variable "vpc_cidr" { type = string }
