@@ -1,27 +1,35 @@
-# data "terraform_remote_state" "network" {
-#   backend = "local"
-#   config = {
-#     path = "${path.module}/../10-network/terraform.tfstate"
-#   }
-# }
+data "terraform_remote_state" "network" {
+  backend = "local"
+  config = {
+    path = "${path.module}/../10-network/terraform.tfstate"
+  }
+}
+
+data "terraform_remote_state" "security" {
+  backend = "local"
+  config = {
+    path = "${path.module}/../20-security/terraform.tfstate"
+  }
+}
 
 locals {
   name = "${var.project}-${var.env}"
   tags = merge(var.tags, { Project = var.project, Env = var.env })
-  # vpc_id = data.terraform_remote_state.network.outputs.vpc_id
-  # private_subnet_ids = data.terraform_remote_state.network.outputs.private_subnet_ids
-  vpc_id = "vpc-xxxxxxxx"
-  private_subnet_ids = ["subnet-xxxxxxxxxxxxxxxxx"]
+  private_subnet_ids = data.terraform_remote_state.network.outputs.private_subnet_ids
+  # vpc_id = "vpc-xxxxxxxx"
+  # private_subnet_ids = ["subnet-xxxxxxxxxxxxxxxxx"]
+  sg_postgres_id = data.terraform_remote_state.security.outputs.sg_postgres_id
+  sg_redis_id = data.terraform_remote_state.security.outputs.sg_redis_id
+  sg_mongo_id = data.terraform_remote_state.security.outputs.sg_mongo_id
 }
 
 # PostgreSQL
 module "postgres" {
   for_each             = toset(local.private_subnet_ids)
-  source              = "../../modules/data/ec2-postgres"
-  name                = local.name
-  vpc_id              = local.vpc_id
-  subnet_id           = each.value
-  # ssh_allowed_cidrs   = var.ssh_allowed_cidrs
+  source               = "../../modules/data/ec2-postgres"
+  name                 = local.name
+  subnet_id            = each.value
+  sg_postgres_id       = local.sg_postgres_id
 
   ami_id        = coalesce(var.postgres_ami_id, var.ami_id)
   instance_type = coalesce(var.postgres_instance_type, var.instance_type)
@@ -37,11 +45,10 @@ module "postgres" {
 # Redis
 module "redis" {
   for_each             = toset(local.private_subnet_ids)
-  source              = "../../modules/data/ec2-redis"
-  name                = local.name
-  vpc_id              = local.vpc_id
-  subnet_id           = each.value
-  # ssh_allowed_cidrs   = var.ssh_allowed_cidrs
+  source               = "../../modules/data/ec2-redis"
+  name                 = local.name
+  subnet_id            = each.value
+  sg_redis_id          = local.sg_redis_id
 
   ami_id        = coalesce(var.redis_ami_id, var.ami_id)
   instance_type = coalesce(var.redis_instance_type, var.instance_type)
@@ -57,11 +64,10 @@ module "redis" {
 # MongoDB
 module "mongo" {
   for_each             = toset(local.private_subnet_ids)
-  source              = "../../modules/data/ec2-mongo"
-  name                = local.name
-  vpc_id              = local.vpc_id
-  subnet_id           = each.value
-  # ssh_allowed_cidrs   = var.ssh_allowed_cidrs
+  source               = "../../modules/data/ec2-mongo"
+  name                 = local.name
+  subnet_id            = each.value
+  sg_mongo_id          = local.sg_mongo_id
 
   ami_id        = coalesce(var.mongo_ami_id, var.ami_id)
   instance_type = coalesce(var.mongo_instance_type, var.instance_type)
@@ -73,15 +79,3 @@ module "mongo" {
 
   tags        = local.tags
 }
-
-# # Postgres 접근 허용
-# resource "aws_security_group_rule" "ecs_to_postgres" {
-#   type                     = "ingress"
-#   security_group_id        = data.terraform_remote_state.data.outputs.postgres_sg_ids["0"] # 키는 환경에 따라
-#   from_port                = 5432
-#   to_port                  = 5432
-#   protocol                 = "tcp"
-#   source_security_group_id = var.ecs_service_sg_id
-# }
-
-# Redis, Mongo도 동일 패턴으로 추가
