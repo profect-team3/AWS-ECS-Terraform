@@ -5,17 +5,9 @@ variable "tags"    {
 }
 
 variable "vpc_id"     { type = string }
-variable "subnet_ids" { type = list(string) }  # 프라이빗 서브넷
+variable "subnet_ids" { type = list(string) }
 
-# VPC Link/NLB에서 들어올 소스만 허용
-variable "allowed_cidrs" {
-  type = list(string)
-  default = []
-}
-variable "allowed_sg_ids"{
-  type = list(string)
-  default = []
-}
+variable "sg_alb_id" { type = string }
 
 # variable "alb_certificate_arn" {
 #   description = "내부 ALB에서 TLS 종단 시 사용할 ACM 인증서(선택, 있으면 HTTPS 리스너 생성)"
