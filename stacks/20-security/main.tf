@@ -11,10 +11,17 @@ locals {
   vpc_id = data.terraform_remote_state.network.outputs.vpc_id
 }
 
-module "security" {
-  source   = "../../modules/security"
+module "security_group" {
+  source   = "../../modules/security/security-group"
   name     = local.name
   tags     = local.tags
   vpc_id   = local.vpc_id
+  service_definitions = var.service_definitions
+}
+
+module "iam" {
+  source   = "../../modules/security/iam"
+  name     = local.name
+  tags     = local.tags
   service_definitions = var.service_definitions
 }
