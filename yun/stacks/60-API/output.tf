@@ -1,36 +1,5 @@
-variable "project" { type = string }
-variable "env"     { type = string }
-variable "region"  { type = string }
-variable "tags"    {
-  type = map(string)
-  default = {}
-}
-
-# ALB
-variable "alb_allowed_cidrs" {
-  type = list(string)
-  default = []
-}
-variable "alb_allowed_sg_ids"{
-  type = list(string)
-  default = []
-}
-variable "services" {
-  type = map(object({
-    port  = number
-    paths = list(string)
-  }))
-}
-
-variable "health_check_path" {
-  description = "공통 헬스체크 경로"
-  type        = string
-  default     = "/health"
-}
 
 ###
-
-
 
 # APIGW 도메인/ACM
 # variable "edge_domain"         { type = string } # api.example.com

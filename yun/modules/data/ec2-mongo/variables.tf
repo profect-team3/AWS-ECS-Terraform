@@ -4,8 +4,9 @@ variable "tags" {
   default = {}
 }
 
-variable "vpc_id"  { type = string }
 variable "subnet_id" { type = string }
+
+variable "sg_mongo_id" { type = string }
 
 variable "ami_id"        { type = string }
 variable "instance_type" { type = string }
@@ -27,8 +28,3 @@ variable "volume_iops" {
   default = null
 }
 
-# (선택) SSH 허용 CIDR
-variable "ssh_allowed_cidrs" {
-  type    = list(string)
-  default = []
-}

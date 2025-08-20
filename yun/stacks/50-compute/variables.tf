@@ -10,6 +10,11 @@ variable "tags" {
 # variable "service_security_group_ids"{ type = list(string) }
 
 # api services
+variable "repositories" {
+  type    = list(string)
+  default = ["repo"]
+}
+
 variable "api_services" {
   type    = list(string)
   default = ["user","store","auth","order","payment","review","mcpserver","ai"]
