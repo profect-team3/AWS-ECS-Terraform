@@ -35,6 +35,7 @@ variable "image_mutability" {
 #   type = string
 #   default = null
 # }
+
 variable "keep_tag_prefixes"{
   type    = list(string)
   default = ["latest"]

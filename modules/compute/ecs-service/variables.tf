@@ -18,22 +18,24 @@ variable "service_definitions" {
   }))
 }
 
-# variable "cluster_arn" {
-#   description = "ECS Cluster ARN"
-#   type        = string
-# }
+variable "cluster_arn" {
+  description = "ECS Cluster ARN"
+  type        = string
+}
 
-# variable "vpc_id" {
-#   description = "VPC ID (서비스 SG 생성용)"
-#   type        = string
-# }
-#
-# variable "private_subnet_ids" {
-#   description = "서비스가 배치될 프라이빗 서브넷 목록"
-#   type        = list(string)
-# }
-#
-# variable "alb_sg_id" {
-#   description = "ALB Security Group ID (ECS 인바운드 소스)"
-#   type        = string
-# }
+variable "task_definition_arns" {
+  description = "서비스가 배치될 프라이빗 서브넷 목록"
+  type        = map(string)
+}
+
+variable "private_subnet_ids" {
+  type = list(string)
+}
+
+variable "sg_ecs_service_ids" {
+  type = map(string)
+}
+
+variable "target_group_arns" {
+  type = map(string)
+}

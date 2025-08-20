@@ -33,8 +33,8 @@ module "ecs_cluster" {
   name         = local.name
 }
 
-# ECS Services (다중)
-module "ecs_service" {
+# ECS Task
+module "ecs_task" {
   source                 = "../../modules/compute/ecs-task-definition"
   name                   = local.name
   region                 = var.region
