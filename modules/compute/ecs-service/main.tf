@@ -1,62 +1,62 @@
-# locals {
-#   svc_keys = sort(keys(var.service_definitions))
-# }
-#
-# # -------- CloudWatch Log Group (per service) --------
-# resource "aws_cloudwatch_log_group" "svc" {
-#   for_each          = var.service_definitions
-#   name              = "/ecs/${var.name}-${each.key}"
-#   retention_in_days = lookup(each.value, "log_retention_days", 14)
-#   tags              = merge(var.tags, { Service = each.key })
-# }
-#
-# # -------- Task Definitions (per service) --------
-# resource "aws_ecs_task_definition" "svc" {
-#   for_each                 = var.service_definitions
-#   family                   = "${var.name}-${each.key}"
-#   network_mode             = "awsvpc"
-#   requires_compatibilities = ["FARGATE"]
-#   cpu                      = each.value.cpu
-#   memory                   = each.value.memory
-#
-#   # IAM은 외부 모듈 주입
-#   execution_role_arn       = each.value.exec_role_arn
-#   task_role_arn            = each.value.task_role_arn
-#
-#   runtime_platform { operating_system_family = "LINUX" }
-#
-#   container_definitions = jsonencode([
-#     {
-#       name      = each.key
-#       image     = each.value.image
-#       essential = true
-#       portMappings = [
-#         { containerPort = each.value.port, hostPort = each.value.port, protocol = "tcp" }
-#       ]
-#       environment = [ for k, v in lookup(each.value, "env", {}) : { name = k, value = v } ]
-#       secrets     = [ for s in lookup(each.value, "secrets", []) : { name = s.name, valueFrom = s.valueFrom } ]
-#       logConfiguration = {
-#         logDriver = "awslogs",
-#         options = {
-#           awslogs-group         = aws_cloudwatch_log_group.svc[each.key].name
-#           awslogs-region        = var.region
-#           awslogs-stream-prefix = each.key
-#         }
-#       }
-#     }
-#   ])
-#
-#   # 필수 입력 검증
-#   lifecycle {
-#     precondition {
-#       condition     = length(trimspace(each.value.exec_role_arn)) > 0 && length(trimspace(each.value.task_role_arn)) > 0
-#       error_message = "Service '${each.key}': exec_role_arn/task_role_arn 은 필수입니다(외부 IAM 모듈에서 전달)."
-#     }
-#   }
-#
-#   tags = merge(var.tags, { Service = each.key })
-# }
-#
+locals {
+  svc_keys = sort(keys(var.service_definitions))
+}
+
+# CloudWatch Log Group
+resource "aws_cloudwatch_log_group" "svc" {
+  for_each          = var.service_definitions
+  name              = "/ecs/${var.name}-${each.key}"
+  retention_in_days = lookup(each.value, "log_retention_days", 7)
+  tags              = merge(var.tags, {
+    Service = each.key
+  })
+}
+
+# Task Definitions
+resource "aws_ecs_task_definition" "svc_task" {
+  for_each     = var.service_definitions
+  family       = "${var.name}-${each.key}"
+  network_mode = "awsvpc"
+  requires_compatibilities = ["FARGATE"]
+  cpu          = each.value.cpu
+  memory       = each.value.memory
+
+  execution_role_arn = var.ecs_task_execution_role_arn
+  task_role_arn      = var.ecs_task_role_arns[each.key]
+
+  runtime_platform {
+    operating_system_family = "LINUX"
+  }
+
+  container_definitions = jsonencode([
+    {
+      name      = each.key
+      image     = "${lookup(var.repository_urls, each.key, values(var.repository_urls)[0])}/${lookup(var.repository_names, each.key, values(var.repository_names)[0])}:${each.key}"
+      essential = true
+      portMappings = [
+        {
+          containerPort = each.value.port
+          hostPort      = each.value.port
+          protocol      = "tcp"
+        }
+      ]
+      logConfiguration = {
+        logDriver = "awslogs",
+        options = {
+          awslogs-group         = aws_cloudwatch_log_group.svc[each.key].name
+          awslogs-region        = var.region
+          awslogs-stream-prefix = each.key
+        }
+      }
+    }
+  ])
+
+  tags = merge(var.tags, {
+    Service = each.key
+  })
+}
+
+
 # # -------- ECS Services (per service) --------
 # resource "aws_ecs_service" "svc" {
 #   for_each                = var.service_definitions

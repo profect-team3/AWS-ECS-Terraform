@@ -44,26 +44,16 @@ variable "keep_any_last"    {
   default = 5
 }
 
-
-# ECS Services 리스트
-# variable "services" {
-#   type = list(object({
-#     name            = string
-#     cpu             = number
-#     memory          = number
-#     desired_count   = number
-#     image           = string
-#     container_port  = number
-#     env_vars        = map(string)
-#     secrets         = list(object({ name = string, arn = string }))
-#     autoscaling     = object({ min = number, max = number, target_cpu = number })
-#   }))
-# }
-# variable "enable_execute_command" {
-#   type = bool
-#   default = true
-# }
-# variable "log_retention_days"     {
-#   type = number
-#   default = 7
-# }
+# ecs task definitions
+variable "service_definitions" {
+  type = map(object({
+    port         = number
+    ingress_from = string
+    egress       = list(object({
+      to   = string
+      port = number
+    }))
+    cpu    = string
+    memory = string
+  }))
+}
