@@ -25,7 +25,7 @@ resource "aws_instance" "db" {
     sudo sed -i "s/listen_addresses = 'localhost'/listen_addresses = '*'/" $PG_CONF
     echo "host all all 0.0.0.0/0 md5" | sudo tee -a $PG_HBA
     sudo ufw allow 5432/tcp
-    sudo systemctl restart postgresql
+    sudo systemctl restart postgresql@16-main
     sudo -u postgres psql -c "CREATE DATABASE order_platform;"
     sudo -u postgres psql -c "CREATE USER bonun WITH PASSWORD 'password';"
     sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE order_platform TO bonun;"

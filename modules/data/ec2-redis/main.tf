@@ -15,8 +15,28 @@ resource "aws_instance" "db" {
 
   user_data = <<-EOF
     #!/bin/bash
-    #
-  EOF
+    set -e
+    sudo apt update
+    sudo apt install redis-server redis-tools -y
+    sudo systemctl start redis-server
+    sudo systemctl enable redis-server
+    REDIS_CONF="/etc/redis/redis.conf"
+    sudo sed -i 's/^bind 127.0.0.1 ::1/# bind 127.0.0.1 ::1/' "$REDIS_CONF"
+    REDIS_PASSWORD="your_strong_password"
+    if grep -q "^# requirepass" "$REDIS_CONF"; then
+    sudo sed -i "s/^# requirepass .*/requirepass $REDIS_PASSWORD/" "$REDIS_CONF"
+    else
+    echo "requirepass $REDIS_PASSWORD" | sudo tee -a "$REDIS_CONF"
+    fi
+    sudo ufw allow 6379/tcp
+    sudo systemctl restart redis-server
+    sudo systemctl status redis-server
+    redis-cli -a "$REDIS_PASSWORD" ping
+      tags = merge(var.tags, {
+        Name = "${var.name}-redis"
+      })
+    }
+    EOF
 
   tags = merge(var.tags, {
     Name = "${var.name}-redis"
