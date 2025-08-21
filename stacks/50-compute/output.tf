@@ -1,5 +1,4 @@
 output "ecr_repository_url"  { value = module.ecr.repository_urls }
-output "cluster_id"          { value = module.ecs_cluster.cluster_id }
-# # output "service_arns"        { value = module.ecs_service.service_arns }
-# output "task_definition_arns"{ value = module.ecs_service.task_definition_arns }
-# output "log_groups"          { value = module.ecs_service.log_groups }
+output "cluster_arn"          { value = module.ecs_cluster.cluster_arn }
+output "task_definition_arns"{ value = module.ecs_task.task_definition_arns }
+

@@ -1,0 +1,3 @@
+# # output "service_arns"        { value = module.ecs_service.service_arns }
+# output "task_definition_arns"{ value = module.ecs_service.task_definition_arns }
+# output "log_groups"          { value = module.ecs_service.log_groups }
