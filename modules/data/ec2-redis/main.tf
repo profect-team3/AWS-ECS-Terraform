@@ -32,10 +32,6 @@ resource "aws_instance" "db" {
     sudo systemctl restart redis-server
     sudo systemctl status redis-server
     redis-cli -a "$REDIS_PASSWORD" ping
-      tags = merge(var.tags, {
-        Name = "${var.name}-redis"
-      })
-    }
     EOF
 
   tags = merge(var.tags, {
