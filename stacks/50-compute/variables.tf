@@ -6,19 +6,7 @@ variable "tags" {
   default     = {}
 }
 
-# 네트워크 (서비스 배포용)
-# variable "service_security_group_ids"{ type = list(string) }
-
-# api services
-variable "repositories" {
-  type    = list(string)
-  default = ["repo"]
-}
-
-variable "api_services" {
-  type    = list(string)
-  default = ["user","store","auth","order","payment","review","mcpserver","ai"]
-}
+# ecr
 variable "image_mutability" {
   type = string
   default = "MUTABLE"

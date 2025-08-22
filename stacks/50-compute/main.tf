@@ -17,7 +17,7 @@ locals {
 module "ecr" {
   source            = "../../modules/compute/ecr"
   name              = local.name
-  repositories      = var.repositories
+  repositories      = keys(var.service_definitions)
   image_mutability  = var.image_mutability
   # scan_on_push     = var.scan_on_push
   # encryption_type  = var.encryption_type
@@ -33,6 +33,22 @@ module "ecs_cluster" {
   name         = local.name
 }
 
+
+locals {
+  expanded_service_definitions = {
+    for svc, conf in var.service_definitions : svc => merge(conf, {
+      image = "${lookup(module.ecr.repository_urls, svc, module.ecr.repository_names["user"])}:latest"
+      # environment = [
+      #   for e in lookup(conf, "egress", []) : {
+      #     name  = "${upper(e.to)}_HOST"
+      #     value = "${e.to}.service.local"
+      #   }
+      #   if contains(["postgres", "redis", "mongo"], e.to)
+      # ]
+    })
+  }
+}
+
 # ECS Task
 module "ecs_task" {
   source                 = "../../modules/compute/ecs-task-definition"
@@ -40,10 +56,7 @@ module "ecs_task" {
   region                 = var.region
   tags                   = local.tags
 
-  service_definitions    = var.service_definitions
-
-  repository_urls        = module.ecr.repository_urls
-  repository_names       = module.ecr.repository_names
+  service_definitions    = local.expanded_service_definitions
   ecs_task_role_arns     = local.ecs_task_role_arns
   ecs_task_execution_role_arn = local.ecs_task_execution_role_arn
 }
