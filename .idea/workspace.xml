@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16bd0dad-279e-4079-9401-5de331a8bd87" name="Changes" comment="chore(terraform): esc namespace output 추가">
+    <list default="true" id="16bd0dad-279e-4079-9401-5de331a8bd87" name="Changes" comment="chore(terraform): es2 data 추가&#10;- ec2 postgresSQL 추가&#10;- ec2 redis 추가&#10;- ec2 mongo -&gt; AWS DocumentDB 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/data/ec2-mongo/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-mongo/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/data/ec2-mongo/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-mongo/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/data/ec2-postgres/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-postgres/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/data/ec2-postgres/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-postgres/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/data/ec2-redis/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-redis/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/data/ec2-redis/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-redis/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stacks/30-data/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stacks/30-data/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/variables.tf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -281,7 +273,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755850901507</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="chore(terraform): es2 data 추가&#10;- ec2 postgresSQL 추가&#10;- ec2 redis 추가&#10;- ec2 mongo -&gt; AWS DocumentDB 수정">
+      <option name="closed" value="true" />
+      <created>1755853852945</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1755853852945</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,6 +333,7 @@
     <MESSAGE value="chore(terraform): esc cluster, task definition 수정&#10;- namespace 추가" />
     <MESSAGE value="chore(terraform): esc namespace 수정&#10;- namespace 변수 추가" />
     <MESSAGE value="chore(terraform): esc namespace output 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore(terraform): esc namespace output 추가" />
+    <MESSAGE value="chore(terraform): es2 data 추가&#10;- ec2 postgresSQL 추가&#10;- ec2 redis 추가&#10;- ec2 mongo -&gt; AWS DocumentDB 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore(terraform): es2 data 추가&#10;- ec2 postgresSQL 추가&#10;- ec2 redis 추가&#10;- ec2 mongo -&gt; AWS DocumentDB 수정" />
   </component>
 </project>
