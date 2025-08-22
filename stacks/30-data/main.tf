@@ -60,10 +60,24 @@ module "redis" {
 
   tags        = local.tags
 }
-#
-# # MongoDB
+
+module "docdb" {
+  source      = "../../modules/data/docdb"
+  name        = local.name
+  subnet_ids  = local.private_subnet_ids
+  sg_mongo_id = local.sg_mongo_id
+
+  db_username    = var.db_username
+  db_password    = var.db_password
+  instance_class = var.docdb_instance_class
+
+  tags = var.tags
+}
+
+
+# MongoDB
 # module "mongo" {
-#   # for_each             = toset(local.private_subnet_ids)
+#   for_each             = toset(local.private_subnet_ids)
 #   source               = "../../modules/data/ec2-mongo"
 #   name                 = local.name
 #   subnet_id            = local.private_subnet_ids[0]
