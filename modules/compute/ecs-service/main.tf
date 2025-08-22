@@ -5,10 +5,10 @@ resource "aws_ecs_service" "svc" {
   cluster                 = var.cluster_arn
   task_definition         = var.task_definition_arns[each.key]
   # desired_count           = each.value.desired_count
-  enable_execute_command  = lookup(each.value, "enable_execute_command", true)
+  # enable_execute_command  = lookup(each.value, "enable_execute_command", true)
   launch_type             = "FARGATE"
-  platform_version        = lookup(each.value, "platform_version", "LATEST")
-  propagate_tags          = lookup(each.value, "propagate_tags_from_service", true) ? "SERVICE" : "NONE"
+  # platform_version        = lookup(each.value, "platform_version", "LATEST")
+  # propagate_tags          = lookup(each.value, "propagate_tags_from_service", true) ? "SERVICE" : "NONE"
   health_check_grace_period_seconds = lookup(each.value, "health_check_grace_period_seconds", 30)
 
   network_configuration {
@@ -29,6 +29,19 @@ resource "aws_ecs_service" "svc" {
   lifecycle {
     # 외부 오토스케일러/배포툴과 충돌 방지
     ignore_changes = [desired_count]
+  }
+
+  # Service Connect 연결
+  service_connect_configuration {
+    enabled = true
+    service {
+      port_name      = each.key
+      discovery_name = each.key
+      client_alias {
+        dns_name = each.key
+        port     = each.value.port
+      }
+    }
   }
 
   tags = merge(var.tags, {

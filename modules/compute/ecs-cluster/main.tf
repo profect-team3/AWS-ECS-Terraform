@@ -1,3 +1,9 @@
+resource "aws_service_discovery_private_dns_namespace" "svc" {
+  name = "${var.name}-svc-ns"
+  vpc  = var.vpc_id
+  tags = var.tags
+}
+
 resource "aws_ecs_cluster" "this" {
   name = "${var.name}-ecs-cluster"
 
@@ -6,6 +12,10 @@ resource "aws_ecs_cluster" "this" {
   #   name  = "containerInsights"
   #   value = "enabled"
   # }
+
+  service_connect_defaults {
+    namespace = aws_service_discovery_private_dns_namespace.svc.arn
+  }
 
   tags = var.tags
 }

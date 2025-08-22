@@ -15,6 +15,7 @@ variable "service_definitions" {
     }))
     cpu    = string
     memory = string
+    image  = string
   }))
 }
 
@@ -28,12 +29,12 @@ variable "ecs_task_role_arns" {
   type        = map(string)
 }
 
-variable "repository_urls" {
-  description = "서비스별 ECR 리포지토리 URL"
-  type        = map(string)
-}
-
-variable "repository_names" {
-  description = "서비스별 ECR 리포지토리 이름"
-  type        = map(string)
-}
+# variable "repository_urls" {
+#   description = "서비스별 ECR 리포지토리 URL"
+#   type        = map(string)
+# }
+#
+# variable "repository_names" {
+#   description = "서비스별 ECR 리포지토리 이름"
+#   type        = map(string)
+# }

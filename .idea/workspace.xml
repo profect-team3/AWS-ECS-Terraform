@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16bd0dad-279e-4079-9401-5de331a8bd87" name="Changes" comment="chore(terraform): ecs service 분리&#10;- ecr, ecs service 동시에 생성 시 이미지가 없어 오류 발생&#10;- modules/&#10;  - ecr, ecs-cluster, ecs-task-definition, ecs-service&#10;- stacks/&#10;  - 50-compute&#10;  - 55-compute-service">
+    <list default="true" id="16bd0dad-279e-4079-9401-5de331a8bd87" name="Changes" comment="chore(terraform): esc cluster, task definition 수정&#10;- namespace 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/compute/ecs-cluster/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecs-cluster/output.tf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/compute/ecs-service/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecs-service/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/compute/ecs-service/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecs-service/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stacks/50-compute/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/50-compute/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stacks/50-compute/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/50-compute/output.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stacks/50-compute/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/50-compute/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stacks/55-compute-service/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/55-compute-service/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stacks/55-compute-service/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/55-compute-service/variables.tf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,22 +36,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feat/#10-terraform",
-    "last_opened_file_path": "/Users/jungyunjoo/IdeaProjects/goorm/AWS-Terraform/modules/compute",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat/#10-terraform&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/jungyunjoo/IdeaProjects/goorm/AWS-Terraform/modules/compute&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/modules/compute" />
@@ -102,7 +95,8 @@
       <option name="presentableId" value="Default" />
       <updated>1755483482009</updated>
       <workItem from="1755483483071" duration="45502000" />
-      <workItem from="1755672600362" duration="15397000" />
+      <workItem from="1755672600362" duration="20696000" />
+      <workItem from="1755750536259" duration="17076000" />
     </task>
     <task id="LOCAL-00001" summary="feat(terraform): edge 테스트 완료&#10;- nlb, alb, API Gateway&#10;- route53, waf 이후 추가">
       <option name="closed" value="true" />
@@ -232,7 +226,39 @@
       <option name="project" value="LOCAL" />
       <updated>1755684908298</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="chore(terraform): ecs service, compute 수정">
+      <option name="closed" value="true" />
+      <created>1755692271408</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1755692271408</updated>
+    </task>
+    <task id="LOCAL-00018" summary="chore(terraform): ecs task 정의 수정&#10;- image 추가&#10;- ecr 경로 수정">
+      <option name="closed" value="true" />
+      <created>1755837553803</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1755837553803</updated>
+    </task>
+    <task id="LOCAL-00019" summary="chore(terraform): ecr Lifecycle Policy 수정&#10;- latest 태그 보존&#10;- 최근 10개 이미지 보존">
+      <option name="closed" value="true" />
+      <created>1755837596896</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1755837596896</updated>
+    </task>
+    <task id="LOCAL-00020" summary="chore(terraform): esc cluster, task definition 수정&#10;- namespace 추가">
+      <option name="closed" value="true" />
+      <created>1755840198137</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1755840198137</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -278,6 +304,10 @@
     <MESSAGE value="feat(terraform): security 수정&#10;- security_group 분리&#10;- iam 추가&#10;  - ecs_task_execution_role&#10;  - ecs_task_role" />
     <MESSAGE value="feat(terraform): compute 수정&#10;- ecs task definitions 추가" />
     <MESSAGE value="chore(terraform): ecs service 분리&#10;- ecr, ecs service 동시에 생성 시 이미지가 없어 오류 발생&#10;- modules/&#10;  - ecr, ecs-cluster, ecs-task-definition, ecs-service&#10;- stacks/&#10;  - 50-compute&#10;  - 55-compute-service" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore(terraform): ecs service 분리&#10;- ecr, ecs service 동시에 생성 시 이미지가 없어 오류 발생&#10;- modules/&#10;  - ecr, ecs-cluster, ecs-task-definition, ecs-service&#10;- stacks/&#10;  - 50-compute&#10;  - 55-compute-service" />
+    <MESSAGE value="chore(terraform): ecs service, compute 수정" />
+    <MESSAGE value="chore(terraform): ecs task 정의 수정&#10;- image 추가&#10;- ecr 경로 수정" />
+    <MESSAGE value="chore(terraform): ecr Lifecycle Policy 수정&#10;- latest 태그 보존&#10;- 최근 10개 이미지 보존" />
+    <MESSAGE value="chore(terraform): esc cluster, task definition 수정&#10;- namespace 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore(terraform): esc cluster, task definition 수정&#10;- namespace 추가" />
   </component>
 </project>

@@ -1,3 +1,10 @@
+data "terraform_remote_state" "network" {
+  backend = "local"
+  config = {
+    path = "${path.module}/../10-network/terraform.tfstate"
+  }
+}
+
 data "terraform_remote_state" "security" {
   backend = "local"
   config = {
@@ -8,6 +15,7 @@ data "terraform_remote_state" "security" {
 locals {
   name = "${var.project}-${var.env}"
   tags = merge(var.tags, { Project = var.project, Env = var.env })
+  vpc_id = data.terraform_remote_state.network.outputs.vpc_id
 
   ecs_task_execution_role_arn = data.terraform_remote_state.security.outputs.ecs_task_execution_role_arn
   ecs_task_role_arns = data.terraform_remote_state.security.outputs.ecs_task_role_arns
@@ -17,7 +25,7 @@ locals {
 module "ecr" {
   source            = "../../modules/compute/ecr"
   name              = local.name
-  repositories      = var.repositories
+  repositories      = keys(var.service_definitions)
   image_mutability  = var.image_mutability
   # scan_on_push     = var.scan_on_push
   # encryption_type  = var.encryption_type
@@ -31,6 +39,23 @@ module "ecr" {
 module "ecs_cluster" {
   source       = "../../modules/compute/ecs-cluster"
   name         = local.name
+  vpc_id       = local.vpc_id
+}
+
+
+locals {
+  expanded_service_definitions = {
+    for svc, conf in var.service_definitions : svc => merge(conf, {
+      image = "${lookup(module.ecr.repository_urls, svc, module.ecr.repository_names["user"])}:latest"
+      # environment = [
+      #   for e in lookup(conf, "egress", []) : {
+      #     name  = "${upper(e.to)}_HOST"
+      #     value = "${e.to}.service.local"
+      #   }
+      #   if contains(["postgres", "redis", "mongo"], e.to)
+      # ]
+    })
+  }
 }
 
 # ECS Task
@@ -40,10 +65,7 @@ module "ecs_task" {
   region                 = var.region
   tags                   = local.tags
 
-  service_definitions    = var.service_definitions
-
-  repository_urls        = module.ecr.repository_urls
-  repository_names       = module.ecr.repository_names
+  service_definitions    = local.expanded_service_definitions
   ecs_task_role_arns     = local.ecs_task_role_arns
   ecs_task_execution_role_arn = local.ecs_task_execution_role_arn
 }

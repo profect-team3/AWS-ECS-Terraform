@@ -1,7 +1,3 @@
-locals {
-  svc_keys = sort(keys(var.service_definitions))
-}
-
 # CloudWatch Log Group
 resource "aws_cloudwatch_log_group" "svc" {
   for_each          = var.service_definitions
@@ -31,13 +27,14 @@ resource "aws_ecs_task_definition" "svc_task" {
   container_definitions = jsonencode([
     {
       name      = each.key
-      image     = "${lookup(var.repository_urls, each.key, values(var.repository_urls)[0])}/${lookup(var.repository_names, each.key, values(var.repository_names)[0])}:${each.key}"
+      image     = each.value.image
       essential = true
       portMappings = [
         {
           containerPort = each.value.port
           hostPort      = each.value.port
           protocol      = "tcp"
+          name          = each.key
         }
       ]
       logConfiguration = {
@@ -48,6 +45,11 @@ resource "aws_ecs_task_definition" "svc_task" {
           awslogs-stream-prefix = each.key
         }
       }
+      # environment = [
+      #     name  = each.value.
+      #     value = v
+      #   }
+      # ]
     }
   ])
 
