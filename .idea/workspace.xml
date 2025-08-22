@@ -4,9 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16bd0dad-279e-4079-9401-5de331a8bd87" name="Changes" comment="chore(terraform): esc cluster, task definition 수정&#10;- namespace 추가">
+    <list default="true" id="16bd0dad-279e-4079-9401-5de331a8bd87" name="Changes" comment="chore(terraform): esc namespace output 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/compute/ecs-service/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecs-service/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/data/ec2-mongo/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-mongo/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/data/ec2-mongo/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-mongo/output.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/data/ec2-postgres/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-postgres/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/data/ec2-postgres/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-postgres/output.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/data/ec2-redis/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-redis/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/data/ec2-redis/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-redis/output.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/30-data/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/30-data/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/variables.tf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,22 +43,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feat/#10-terraform&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/jungyunjoo/IdeaProjects/goorm/AWS-Terraform/modules/compute&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "dev",
+    "last_opened_file_path": "/Users/jungyunjoo/IdeaProjects/goorm/AWS-Terraform/modules/compute",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/modules/compute" />
@@ -258,7 +265,23 @@
       <option name="project" value="LOCAL" />
       <updated>1755840198137</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="chore(terraform): esc namespace 수정&#10;- namespace 변수 추가">
+      <option name="closed" value="true" />
+      <created>1755850687609</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1755850687609</updated>
+    </task>
+    <task id="LOCAL-00022" summary="chore(terraform): esc namespace output 추가">
+      <option name="closed" value="true" />
+      <created>1755850901507</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1755850901507</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -308,6 +331,8 @@
     <MESSAGE value="chore(terraform): ecs task 정의 수정&#10;- image 추가&#10;- ecr 경로 수정" />
     <MESSAGE value="chore(terraform): ecr Lifecycle Policy 수정&#10;- latest 태그 보존&#10;- 최근 10개 이미지 보존" />
     <MESSAGE value="chore(terraform): esc cluster, task definition 수정&#10;- namespace 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore(terraform): esc cluster, task definition 수정&#10;- namespace 추가" />
+    <MESSAGE value="chore(terraform): esc namespace 수정&#10;- namespace 변수 추가" />
+    <MESSAGE value="chore(terraform): esc namespace output 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore(terraform): esc namespace output 추가" />
   </component>
 </project>

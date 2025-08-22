@@ -25,10 +25,10 @@ locals {
 
 # PostgreSQL
 module "postgres" {
-  for_each             = toset(local.private_subnet_ids)
+  # for_each             = toset(local.private_subnet_ids)
   source               = "../../modules/data/ec2-postgres"
   name                 = local.name
-  subnet_id            = each.value
+  subnet_id            = local.private_subnet_ids[0]
   sg_postgres_id       = local.sg_postgres_id
 
   ami_id        = coalesce(var.postgres_ami_id, var.ami_id)
@@ -44,10 +44,10 @@ module "postgres" {
 
 # Redis
 module "redis" {
-  for_each             = toset(local.private_subnet_ids)
+  # for_each             = toset(local.private_subnet_ids)
   source               = "../../modules/data/ec2-redis"
   name                 = local.name
-  subnet_id            = each.value
+  subnet_id            = local.private_subnet_ids[0]
   sg_redis_id          = local.sg_redis_id
 
   ami_id        = coalesce(var.redis_ami_id, var.ami_id)
@@ -60,22 +60,22 @@ module "redis" {
 
   tags        = local.tags
 }
-
-# MongoDB
-module "mongo" {
-  for_each             = toset(local.private_subnet_ids)
-  source               = "../../modules/data/ec2-mongo"
-  name                 = local.name
-  subnet_id            = each.value
-  sg_mongo_id          = local.sg_mongo_id
-
-  ami_id        = coalesce(var.mongo_ami_id, var.ami_id)
-  instance_type = coalesce(var.mongo_instance_type, var.instance_type)
-  key_name      = coalesce(var.mongo_key_name, var.key_name)
-
-  volume_size = coalesce(var.mongo_volume_size, var.volume_size)
-  volume_type = coalesce(var.mongo_volume_type, var.volume_type)
-  volume_iops = var.volume_iops
-
-  tags        = local.tags
-}
+#
+# # MongoDB
+# module "mongo" {
+#   # for_each             = toset(local.private_subnet_ids)
+#   source               = "../../modules/data/ec2-mongo"
+#   name                 = local.name
+#   subnet_id            = local.private_subnet_ids[0]
+#   sg_mongo_id          = local.sg_mongo_id
+#
+#   ami_id        = coalesce(var.mongo_ami_id, var.ami_id)
+#   instance_type = coalesce(var.mongo_instance_type, var.instance_type)
+#   key_name      = coalesce(var.mongo_key_name, var.key_name)
+#
+#   volume_size = coalesce(var.mongo_volume_size, var.volume_size)
+#   volume_type = coalesce(var.mongo_volume_type, var.volume_type)
+#   volume_iops = var.volume_iops
+#
+#   tags        = local.tags
+# }

@@ -1,6 +1,6 @@
 # EC2
 locals {
-  mongo_names = ["mongoPrimary", "mongoSecondary", "mongoArbiter"]
+  mongo_names = ["mongoPrimary", "mongoSecondary"]
 }
 
 resource "aws_instance" "db" {
@@ -23,10 +23,9 @@ resource "aws_instance" "db" {
     set -e
     sudo apt update
     sudo apt install -y gnupg wget lsb-release
-    wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | \
-    sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/mongodb.gpg
-    echo "deb [ arch=amd64,arm64 signed-by=/etc/apt/trusted.gpg.d/mongodb.gpg ] https://repo.mongodb.org/apt/ubuntu \$(lsb_release -cs)/mongodb-org/6.0 multiverse" | \
-    sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+    wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/mongodb.gpg
+    DISTRO=$(lsb_release -cs)
+    echo "deb [ arch=amd64,arm64 signed-by=/etc/apt/trusted.gpg.d/mongodb.gpg ] https://repo.mongodb.org/apt/ubuntu $DISTRO/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
     sudo apt update
     sudo apt install -y mongodb-org
     sudo systemctl start mongod
@@ -38,3 +37,49 @@ resource "aws_instance" "db" {
     Name = local.mongo_names[count.index]
   })
 }
+
+
+resource "aws_instance" "Arbiterdb" {
+  ami                    = var.ami_id
+  instance_type          = var.instance_type
+  subnet_id              = var.subnet_id
+  vpc_security_group_ids = [var.sg_mongo_id]
+  key_name               = var.key_name
+  associate_public_ip_address = false
+
+  root_block_device {
+    volume_size = var.volume_size
+    volume_type = var.volume_type
+    iops        = var.volume_iops
+  }
+
+  user_data = <<-EOF
+    #!/bin/bash
+    set -e
+    sudo apt update
+    sudo apt install -y gnupg wget lsb-release
+    wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/mongodb.gpg
+    DISTRO=$(lsb_release -cs)
+    echo "deb [ arch=amd64,arm64 signed-by=/etc/apt/trusted.gpg.d/mongodb.gpg ] https://repo.mongodb.org/apt/ubuntu $DISTRO/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+    sudo apt update
+    sudo apt install -y mongodb-org
+    sudo systemctl start mongod
+    sudo systemctl enable mongod
+    sudo ufw allow 27017/tcp || true
+
+    MY_IP=$(ip a | grep inet | grep 10 | cut -d/ -f1)
+    rs.initiate({
+    id: "mongoReplicaSet",
+    members: [
+    { id: 0, host: "$MY_IP:27017" },   // Primary
+    { _id: 1, host: "${aws_instance.db[0].private_ip}:27017" },
+    { _id: 2, host: "${aws_instance.db[1].private_ip}:27017", arbiterOnly: true }
+    ]
+    });
+    EOF
+
+  tags = merge(var.tags, {
+    Name = "mongoArbiter"  # mongoPrimary로
+  })
+}
+
