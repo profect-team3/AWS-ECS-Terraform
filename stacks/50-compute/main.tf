@@ -40,6 +40,7 @@ module "ecs_cluster" {
   source       = "../../modules/compute/ecs-cluster"
   name         = local.name
   vpc_id       = local.vpc_id
+  namespace    = var.namespace
 }
 
 

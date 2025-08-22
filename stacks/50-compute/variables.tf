@@ -33,6 +33,12 @@ variable "keep_any_last"    {
   default = 5
 }
 
+# ecs cluster
+variable "namespace" {
+  type = string
+  default = "svc.local"
+}
+
 # ecs task definitions
 variable "service_definitions" {
   type = map(object({
