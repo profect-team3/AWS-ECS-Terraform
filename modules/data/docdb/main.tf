@@ -17,6 +17,7 @@ resource "aws_docdb_cluster" "this" {
   db_subnet_group_name    = aws_docdb_subnet_group.this.name
   apply_immediately       = true
   tags                    = var.tags
+  final_snapshot_identifier = "${var.name}-docdb-final-snapshot"
 }
 
 # Cluster Instances

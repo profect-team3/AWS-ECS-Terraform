@@ -66,7 +66,6 @@ module "docdb" {
   name        = local.name
   subnet_ids  = local.private_subnet_ids
   sg_mongo_id = local.sg_mongo_id
-
   db_username    = var.db_username
   db_password    = var.db_password
   instance_class = var.docdb_instance_class
