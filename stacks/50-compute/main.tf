@@ -1,3 +1,10 @@
+data "terraform_remote_state" "network" {
+  backend = "local"
+  config = {
+    path = "${path.module}/../10-network/terraform.tfstate"
+  }
+}
+
 data "terraform_remote_state" "security" {
   backend = "local"
   config = {
@@ -8,6 +15,7 @@ data "terraform_remote_state" "security" {
 locals {
   name = "${var.project}-${var.env}"
   tags = merge(var.tags, { Project = var.project, Env = var.env })
+  vpc_id = data.terraform_remote_state.network.outputs.vpc_id
 
   ecs_task_execution_role_arn = data.terraform_remote_state.security.outputs.ecs_task_execution_role_arn
   ecs_task_role_arns = data.terraform_remote_state.security.outputs.ecs_task_role_arns
@@ -31,6 +39,7 @@ module "ecr" {
 module "ecs_cluster" {
   source       = "../../modules/compute/ecs-cluster"
   name         = local.name
+  vpc_id       = local.vpc_id
 }
 
 

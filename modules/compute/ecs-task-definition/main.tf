@@ -34,6 +34,7 @@ resource "aws_ecs_task_definition" "svc_task" {
           containerPort = each.value.port
           hostPort      = each.value.port
           protocol      = "tcp"
+          name          = each.key
         }
       ]
       logConfiguration = {
