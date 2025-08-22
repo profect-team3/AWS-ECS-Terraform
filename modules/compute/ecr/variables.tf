@@ -35,5 +35,5 @@ variable "keep_tag_prefixes" {
 # any 이미지 최근 N개 보존
 variable "keep_any_last" {
   type    = number
-  default = 2
+  default = 10
 }
