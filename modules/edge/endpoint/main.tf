@@ -35,6 +35,28 @@ resource "aws_vpc_endpoint_route_table_association" "s3_gw_assoc" {
   vpc_endpoint_id = aws_vpc_endpoint.s3_gw.id
 }
 
+# Secrets Manager (Interface)
+resource "aws_vpc_endpoint" "secretsmanager" {
+  vpc_id              = var.vpc_id
+  service_name        = "com.amazonaws.${var.region}.secretsmanager"
+  vpc_endpoint_type   = "Interface"
+  private_dns_enabled = true
+  subnet_ids          = var.subnet_ids
+  security_group_ids  = [var.vpc_endpoint_sg_id]
+  tags = merge(var.tags, { Name = "${var.name}-vpce-secretsmanager" })
+}
+
+# KMS (Interface)
+resource "aws_vpc_endpoint" "kms" {
+  vpc_id              = var.vpc_id
+  service_name        = "com.amazonaws.${var.region}.kms"
+  vpc_endpoint_type   = "Interface"
+  private_dns_enabled = true
+  subnet_ids          = var.subnet_ids
+  security_group_ids  = [var.vpc_endpoint_sg_id]
+  tags = merge(var.tags, { Name = "${var.name}-vpce-kms" })
+}
+
 # CloudWatch Logs (Interface)
 resource "aws_vpc_endpoint" "logs" {
   vpc_id              = var.vpc_id
