@@ -17,23 +17,18 @@ resource "aws_instance" "db" {
     #!/bin/bash
     set -e
     sudo apt update
-    sudo apt install -y wget lsb-release gnupg
-    sudo add-apt-repository -y ppa:redislabs/redis
-    sudo apt update
     sudo apt install -y redis-server
-    sudo systemctl start redis-server
-    sudo systemctl enable redis-server
+    sudo systemctl enable --now redis-server
     REDIS_CONF="/etc/redis/redis.conf"
+    REDIS_PASSWORD="password"
     sudo sed -i 's/^bind 127.0.0.1 ::1/# bind 127.0.0.1 ::1/' "$REDIS_CONF"
-    REDIS_PASSWORD="your_strong_password"
     if grep -q "^# requirepass" "$REDIS_CONF"; then
-    sudo sed -i "s/^# requirepass .*/requirepass $REDIS_PASSWORD/" "$REDIS_CONF"
+        sudo sed -i "s/^# requirepass .*/requirepass $REDIS_PASSWORD/" "$REDIS_CONF"
     else
-    echo "requirepass $REDIS_PASSWORD" | sudo tee -a "$REDIS_CONF"
+        echo "requirepass $REDIS_PASSWORD" | sudo tee -a "$REDIS_CONF"
     fi
     sudo ufw allow 6379/tcp
     sudo systemctl restart redis-server
-    sudo systemctl status redis-server
     redis-cli -a "$REDIS_PASSWORD" ping
     EOF
 

@@ -23,6 +23,7 @@ resource "aws_instance" "mongo_client" {
     sudo apt-get update
     sudo apt-get install -y mongodb-mongosh
     mongosh --version
+    wget https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem
     EOF
 
   tags = merge(var.tags, {
