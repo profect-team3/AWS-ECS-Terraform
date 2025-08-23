@@ -5,6 +5,9 @@ variable "tags" {
   default = {}
 }
 
+# env
+variable "secret_names"        { type = map(string) }
+
 variable "service_definitions" {
   type = map(object({
     port         = number
@@ -16,6 +19,8 @@ variable "service_definitions" {
     cpu    = string
     memory = string
     image  = string
+    env_map     = map(string)
+    secret_keys = list(string)
   }))
 }
 

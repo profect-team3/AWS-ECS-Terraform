@@ -24,4 +24,6 @@ module "iam" {
   name     = local.name
   tags     = local.tags
   service_definitions = var.service_definitions
+  secret_names = var.secret_names
+  kms_key_arn  = var.kms_key_arn
 }

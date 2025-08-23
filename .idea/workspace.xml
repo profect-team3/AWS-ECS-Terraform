@@ -6,6 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="16bd0dad-279e-4079-9401-5de331a8bd87" name="Changes" comment="chore(terraform): es2 data 추가&#10;- ec2 postgresSQL 추가&#10;- ec2 redis 추가&#10;- ec2 mongo -&gt; AWS DocumentDB 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/compute/ecs-task-definition/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecs-task-definition/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/compute/ecs-task-definition/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecs-task-definition/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/security/iam/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/security/iam/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/security/iam/variable.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/security/iam/variable.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/20-security/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/20-security/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/20-security/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/20-security/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/30-data/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/30-data/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/output.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/30-data/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/50-compute/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/50-compute/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/50-compute/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/50-compute/variables.tf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +51,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "feat/#10-terraform",
     "last_opened_file_path": "/Users/jungyunjoo/IdeaProjects/goorm/AWS-Terraform/modules/compute",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",

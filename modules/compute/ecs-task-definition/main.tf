@@ -1,3 +1,9 @@
+# 시크릿 이름 → ARN 조회
+data "aws_secretsmanager_secret" "this" {
+  for_each = var.secret_names
+  name     = each.value
+}
+
 # CloudWatch Log Group
 resource "aws_cloudwatch_log_group" "svc" {
   for_each          = var.service_definitions
@@ -45,11 +51,22 @@ resource "aws_ecs_task_definition" "svc_task" {
           awslogs-stream-prefix = each.key
         }
       }
-      # environment = [
-      #     name  = each.value.
-      #     value = v
-      #   }
-      # ]
+
+      # env
+      environment = concat(
+        [
+          { name = "SPRING_PROFILES_ACTIVE", value = "prod" },
+          { name = "TZ", value = "Asia/Seoul" }
+        ],
+        [for k, v in lookup(each.value, "env_map", {}) : { name = k, value = v }]
+      )
+
+      secrets = [
+        for key_name in lookup(each.value, "secret_keys", []) : {
+          name      = key_name
+          valueFrom = data.aws_secretsmanager_secret.this[key_name].arn
+        }
+      ]
     }
   ])
 
