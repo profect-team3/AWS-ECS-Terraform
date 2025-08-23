@@ -69,7 +69,6 @@ module "docdb" {
   db_username    = var.db_username
   db_password    = var.db_password
   instance_class = var.docdb_instance_class
-  key_name = coalesce(var.mongo_key_name, var.key_name)
 
   tags = var.tags
 }
