@@ -8,10 +8,10 @@ variable "subnet_ids" {type = list(string)}
 variable "sg_mongo_id" { type = string }
 
 # variable "ami_id"        { type = string }
-variable "key_name"      {
-  type = string
-  default = null
-}
+# variable "key_name"      {
+#   type = string
+#   default = null
+# }
 
 # variable "volume_size" {
 #   type = number

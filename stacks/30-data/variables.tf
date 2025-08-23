@@ -123,11 +123,11 @@ variable "redis_volume_type" {
 #   default     = null
 # }
 #
-variable "mongo_key_name" {
-  type        = string
-  description = "MongoDB용 키페어 (없으면 공통 key_name 사용)"
-  default     = null
-}
+# variable "mongo_key_name" {
+#   type        = string
+#   description = "MongoDB용 키페어 (없으면 공통 key_name 사용)"
+#   default     = null
+# }
 #
 # variable "mongo_volume_size" {
 #   type        = number
