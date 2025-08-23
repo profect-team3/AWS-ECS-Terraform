@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16bd0dad-279e-4079-9401-5de331a8bd87" name="Changes" comment="feat(terraform): 환경변수 추가&#10;- 20-security&#10;  - iam ecs 권한 수정&#10;    - secretsmanager, KMS 권한 추가&#10;- 50-compute&#10;  - ecs task definition 수정 &#10;    - 환경 변수 추가&#10;    - security manager 변수 추가">
+    <list default="true" id="16bd0dad-279e-4079-9401-5de331a8bd87" name="Changes" comment="Refacotr(DocumentDB): 키페어 삭제&#10;&#10;- DocDB cluster에 인스턴스를 3대 생성하지만 일반적으로 접속 가능한 Ec2와 다름&#10;- 키페어 지원하지 않음">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stacks/30-data/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/main.tf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stacks/30-data/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/output.tf" afterDir="false" />
@@ -12,6 +13,16 @@
       <change beforePath="$PROJECT_DIR$/stacks/50-compute/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/50-compute/main.tf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stacks/50-compute/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/50-compute/variables.tf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stacks/60-API/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/60-API/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/data/docdb/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/docdb/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/data/ec2-mongo/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-mongo/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/data/ec2-mongo/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-mongo/output.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/data/ec2-postgres/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-postgres/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/data/ec2-postgres/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-postgres/output.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/data/ec2-redis/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-redis/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/data/ec2-redis/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-redis/output.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/30-data/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/30-data/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/output.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/30-data/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/variables.tf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +30,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -29,10 +45,17 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/profect-team3/AWS-Terraform.git&quot;,
-    &quot;accountId&quot;: &quot;2afefad3-0816-40d3-8aaf-3b368f9fdd54&quot;
+    &quot;url&quot;: &quot;git@github.com:profect-team3/AWS-Terraform.git&quot;,
+    &quot;accountId&quot;: &quot;fbd0fd28-eb5f-4320-9c74-353d87048b05&quot;
   }
 }</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -71,19 +94,6 @@
       <recent name="$PROJECT_DIR$/yun/modules/api" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="AWS-Terraform" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="AWS-Terraform" />
-      <option name="filePath" />
-      <method v="2" />
-    </configuration>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -102,6 +112,7 @@
       <workItem from="1755483483071" duration="45502000" />
       <workItem from="1755672600362" duration="20696000" />
       <workItem from="1755750536259" duration="17076000" />
+      <workItem from="1755941324200" duration="2373000" />
     </task>
     <task id="LOCAL-00001" summary="feat(terraform): edge 테스트 완료&#10;- nlb, alb, API Gateway&#10;- route53, waf 이후 추가">
       <option name="closed" value="true" />
@@ -296,6 +307,39 @@
       <updated>1755943766768</updated>
     </task>
     <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00024" summary="feat(DocumentDB): MongoDB -&gt; Amazon Document DB 사용&#10;&#10;- User : Goorm3project&#10;- DB : Goorm3DocumentDB&#10;- db.t3.medium 사용">
+      <option name="closed" value="true" />
+      <created>1755865444371</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1755865444371</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Fix(DocumentDB): Enter a Value&#10;&#10;- network layer에서 값을 받아오도록 변경&#10;- destroy가 작동하지 않아 스냅샷 설정">
+      <option name="closed" value="true" />
+      <created>1755868228446</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1755868228446</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Refacotr(DocumentDB): 키페어 추가&#10;&#10;- MongoDB.pem">
+      <option name="closed" value="true" />
+      <created>1755924257292</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1755924257292</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Refacotr(DocumentDB): 키페어 삭제&#10;&#10;- DocDB cluster에 인스턴스를 3대 생성하지만 일반적으로 접속 가능한 Ec2와 다름&#10;- 키페어 지원하지 않음">
+      <option name="closed" value="true" />
+      <created>1755924581795</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1755924581795</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,7 +356,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="feat/#10-terraform" />
+                        <option value="feat/KSH" />
                       </list>
                     </value>
                   </entry>
@@ -325,8 +369,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(terraform): edge 테스트 완료&#10;- nlb, alb, API Gateway&#10;- route53, waf 이후 추가" />
-    <MESSAGE value="feat(terraform): compute 수정&#10;- ecr, ecs cluster&#10;- iam, ecs service 수정 필요" />
     <MESSAGE value="feat(terraform): security 추가&#10;- alb, ec2, ecs 보안그룹 정의" />
     <MESSAGE value="chore(terraform): compute 수정&#10;- ecr lifecycle policy 주석&#10;- service 변수 변경" />
     <MESSAGE value="chore(terraform): edge 파일 분리 및 수정&#10;- api gateway, route53, waf 분리&#10;- alb 보안그룹 삭제 -&gt; data 변수" />
@@ -348,6 +390,11 @@
     <MESSAGE value="chore(terraform): esc namespace 수정&#10;- namespace 변수 추가" />
     <MESSAGE value="chore(terraform): esc namespace output 추가" />
     <MESSAGE value="chore(terraform): es2 data 추가&#10;- ec2 postgresSQL 추가&#10;- ec2 redis 추가&#10;- ec2 mongo -&gt; AWS DocumentDB 수정" />
+    <MESSAGE value="feat(DocumentDB): MongoDB -&gt; Amazon Document DB 사용&#10;&#10;- User : Goorm3project&#10;- DB : Goorm3DocumentDB&#10;- db.t3.medium 사용" />
+    <MESSAGE value="Fix(DocumentDB): Enter a Value&#10;&#10;- network layer에서 값을 받아오도록 변경&#10;- destroy가 작동하지 않아 스냅샷 설정" />
+    <MESSAGE value="Refacotr(DocumentDB): 키페어 추가&#10;&#10;- MongoDB.pem" />
+    <MESSAGE value="Refacotr(DocumentDB): 키페어 삭제&#10;&#10;- DocDB cluster에 인스턴스를 3대 생성하지만 일반적으로 접속 가능한 Ec2와 다름&#10;- 키페어 지원하지 않음" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refacotr(DocumentDB): 키페어 삭제&#10;&#10;- DocDB cluster에 인스턴스를 3대 생성하지만 일반적으로 접속 가능한 Ec2와 다름&#10;- 키페어 지원하지 않음" />
     <MESSAGE value="feat(terraform): 환경변수 추가&#10;- 20-security&#10;  - iam ecs 권한 수정&#10;    - secretsmanager, KMS 권한 추가&#10;- 50-compute&#10;  - ecs task definition 수정 &#10;    - 환경 변수 추가&#10;    - security manager 변수 추가" />
     <option name="LAST_COMMIT_MESSAGE" value="feat(terraform): 환경변수 추가&#10;- 20-security&#10;  - iam ecs 권한 수정&#10;    - secretsmanager, KMS 권한 추가&#10;- 50-compute&#10;  - ecs task definition 수정 &#10;    - 환경 변수 추가&#10;    - security manager 변수 추가" />
   </component>
