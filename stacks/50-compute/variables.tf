@@ -50,5 +50,22 @@ variable "service_definitions" {
     }))
     cpu    = string
     memory = string
+    env_keys    = list(string)
+    secret_keys = list(string)
   }))
+}
+
+# env
+variable "db_username"            { type = string }
+# variable "mongodb_host"           { type = string }
+# variable "mongo_name"             { type = string }
+variable "redis_port"             { type = string }
+variable "oauth_jwks_uri"         { type = string }
+variable "auth_internal_audience" { type = string }
+variable "toss_url"               { type = string }
+variable "kms_jwt_key_id"         { type = string }
+variable "jwt_issuer"             { type = string }
+
+variable "secret_names" {
+  type        = map(string)
 }

@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+    <list default="true" id="16bd0dad-279e-4079-9401-5de331a8bd87" name="Changes" comment="feat(terraform): 환경변수 추가&#10;- 20-security&#10;  - iam ecs 권한 수정&#10;    - secretsmanager, KMS 권한 추가&#10;- 50-compute&#10;  - ecs task definition 수정 &#10;    - 환경 변수 추가&#10;    - security manager 변수 추가">
     <list default="true" id="16bd0dad-279e-4079-9401-5de331a8bd87" name="Changes" comment="Refacotr(DocumentDB): 키페어 삭제&#10;&#10;- DocDB cluster에 인스턴스를 3대 생성하지만 일반적으로 접속 가능한 Ec2와 다름&#10;- 키페어 지원하지 않음">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/30-data/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/30-data/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/output.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/30-data/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/50-compute/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/50-compute/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/50-compute/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/50-compute/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/60-API/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/60-API/main.tf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/data/docdb/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/docdb/variables.tf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/data/ec2-mongo/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-mongo/main.tf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/data/ec2-mongo/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/data/ec2-mongo/output.tf" afterDir="false" />
@@ -62,8 +69,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feat/KSH",
-    "last_opened_file_path": "/Users/kimseonhyeok/Documents/profect/AWS-Terraform",
+    "git-widget-placeholder": "feat/#10-terraform",
+    "last_opened_file_path": "/Users/jungyunjoo/IdeaProjects/goorm/AWS-Terraform/modules/compute",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -291,6 +298,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755853852945</updated>
     </task>
+    <task id="LOCAL-00024" summary="feat(terraform): 환경변수 추가&#10;- 20-security&#10;  - iam ecs 권한 수정&#10;    - secretsmanager, KMS 권한 추가&#10;- 50-compute&#10;  - ecs task definition 수정 &#10;    - 환경 변수 추가&#10;    - security manager 변수 추가">
+      <option name="closed" value="true" />
+      <created>1755943766767</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1755943766768</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <task id="LOCAL-00024" summary="feat(DocumentDB): MongoDB -&gt; Amazon Document DB 사용&#10;&#10;- User : Goorm3project&#10;- DB : Goorm3DocumentDB&#10;- db.t3.medium 사용">
       <option name="closed" value="true" />
       <created>1755865444371</created>
@@ -379,5 +395,7 @@
     <MESSAGE value="Refacotr(DocumentDB): 키페어 추가&#10;&#10;- MongoDB.pem" />
     <MESSAGE value="Refacotr(DocumentDB): 키페어 삭제&#10;&#10;- DocDB cluster에 인스턴스를 3대 생성하지만 일반적으로 접속 가능한 Ec2와 다름&#10;- 키페어 지원하지 않음" />
     <option name="LAST_COMMIT_MESSAGE" value="Refacotr(DocumentDB): 키페어 삭제&#10;&#10;- DocDB cluster에 인스턴스를 3대 생성하지만 일반적으로 접속 가능한 Ec2와 다름&#10;- 키페어 지원하지 않음" />
+    <MESSAGE value="feat(terraform): 환경변수 추가&#10;- 20-security&#10;  - iam ecs 권한 수정&#10;    - secretsmanager, KMS 권한 추가&#10;- 50-compute&#10;  - ecs task definition 수정 &#10;    - 환경 변수 추가&#10;    - security manager 변수 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(terraform): 환경변수 추가&#10;- 20-security&#10;  - iam ecs 권한 수정&#10;    - secretsmanager, KMS 권한 추가&#10;- 50-compute&#10;  - ecs task definition 수정 &#10;    - 환경 변수 추가&#10;    - security manager 변수 추가" />
   </component>
 </project>

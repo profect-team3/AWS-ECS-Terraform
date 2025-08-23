@@ -12,6 +12,13 @@ data "terraform_remote_state" "security" {
   }
 }
 
+data "terraform_remote_state" "database" {
+  backend = "local"
+  config = {
+    path = "${path.module}/../30-data/terraform.tfstate"
+  }
+}
+
 locals {
   name = "${var.project}-${var.env}"
   tags = merge(var.tags, { Project = var.project, Env = var.env })
@@ -43,18 +50,30 @@ module "ecs_cluster" {
   namespace    = var.namespace
 }
 
-
 locals {
-  expanded_service_definitions = {
-    for svc, conf in var.service_definitions : svc => merge(conf, {
+  env_value_source = {
+    DB_URL                 = "jdbc:postgresql://${data.terraform_remote_state.database.outputs.postgres_private_ips}:5432/order_platform"
+    DB_USERNAME            = var.db_username
+    # MONGODB_HOST           = var.mongodb_host
+    # MONGO_NAME             = var.mongo_name
+    REDIS_HOST             = data.terraform_remote_state.database.outputs.redis_private_ips
+    REDIS_PORT             = var.redis_port
+    ORDER_SVC_URI          = "http://order.${var.namespace}:8084"
+    STORE_SVC_URI          = "http://store.${var.namespace}:8082"
+    MCP_SERVER_SVC_URI     = "http://mcpserver.${var.namespace}:8099"
+    OAUTH_JWKS_URI         = var.oauth_jwks_uri
+    AUTH_INTERNAL_AUDIENCE = var.auth_internal_audience
+    TOSS_URL               = var.toss_url
+    KMS_JWT_KEY_ID         = var.kms_jwt_key_id
+    JWT_ISSUER             = var.jwt_issuer
+  }
+
+  service_definitions_resolved = {
+    for svc, def in var.service_definitions :
+    svc => merge(def, {
       image = "${lookup(module.ecr.repository_urls, svc, module.ecr.repository_names["user"])}:latest"
-      # environment = [
-      #   for e in lookup(conf, "egress", []) : {
-      #     name  = "${upper(e.to)}_HOST"
-      #     value = "${e.to}.service.local"
-      #   }
-      #   if contains(["postgres", "redis", "mongo"], e.to)
-      # ]
+      env_map     = { for k in def.env_keys : k => lookup(local.env_value_source, k, "") }
+      secret_keys = def.secret_keys
     })
   }
 }
@@ -66,7 +85,8 @@ module "ecs_task" {
   region                 = var.region
   tags                   = local.tags
 
-  service_definitions    = local.expanded_service_definitions
+  secret_names           = var.secret_names
+  service_definitions    = local.service_definitions_resolved
   ecs_task_role_arns     = local.ecs_task_role_arns
   ecs_task_execution_role_arn = local.ecs_task_execution_role_arn
 }
