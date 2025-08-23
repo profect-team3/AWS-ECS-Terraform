@@ -19,7 +19,6 @@ locals {
 
   vpc_id = data.terraform_remote_state.network.outputs.vpc_id
   private_subnet_ids = data.terraform_remote_state.network.outputs.private_subnet_ids
-  public_subnet_ids = data.terraform_remote_state.network.outputs.public_subnet_ids
   private_route_table_ids = data.terraform_remote_state.network.outputs.private_route_table_ids
 
   sg_alb_id = data.terraform_remote_state.security.outputs.sg_alb_id
