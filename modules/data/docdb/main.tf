@@ -29,4 +29,5 @@ resource "aws_docdb_cluster_instance" "this" {
   engine             = aws_docdb_cluster.this.engine
   apply_immediately  = true
   tags               = var.tags
+  key_name = var.key_name
 }
