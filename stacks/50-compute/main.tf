@@ -64,6 +64,8 @@ locals {
     OAUTH_JWKS_URI         = var.oauth_jwks_uri
     AUTH_INTERNAL_AUDIENCE = var.auth_internal_audience
     TOSS_URL               = var.toss_url
+    KMS_JWT_KEY_ID         = var.kms_jwt_key_id
+    JWT_ISSUER             = var.jwt_issuer
   }
 
   service_definitions_resolved = {

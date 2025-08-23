@@ -4,19 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16bd0dad-279e-4079-9401-5de331a8bd87" name="Changes" comment="chore(terraform): es2 data 추가&#10;- ec2 postgresSQL 추가&#10;- ec2 redis 추가&#10;- ec2 mongo -&gt; AWS DocumentDB 수정">
+    <list default="true" id="16bd0dad-279e-4079-9401-5de331a8bd87" name="Changes" comment="feat(terraform): 환경변수 추가&#10;- 20-security&#10;  - iam ecs 권한 수정&#10;    - secretsmanager, KMS 권한 추가&#10;- 50-compute&#10;  - ecs task definition 수정 &#10;    - 환경 변수 추가&#10;    - security manager 변수 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/compute/ecs-task-definition/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecs-task-definition/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/compute/ecs-task-definition/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/compute/ecs-task-definition/variables.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/security/iam/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/security/iam/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/security/iam/variable.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/security/iam/variable.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stacks/20-security/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/20-security/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stacks/20-security/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/20-security/variables.tf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stacks/30-data/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/main.tf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stacks/30-data/output.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/output.tf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stacks/30-data/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/30-data/variables.tf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stacks/50-compute/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/50-compute/main.tf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stacks/50-compute/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/50-compute/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stacks/60-API/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/stacks/60-API/main.tf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,7 +287,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755853852945</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="feat(terraform): 환경변수 추가&#10;- 20-security&#10;  - iam ecs 권한 수정&#10;    - secretsmanager, KMS 권한 추가&#10;- 50-compute&#10;  - ecs task definition 수정 &#10;    - 환경 변수 추가&#10;    - security manager 변수 추가">
+      <option name="closed" value="true" />
+      <created>1755943766767</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1755943766768</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -345,6 +348,7 @@
     <MESSAGE value="chore(terraform): esc namespace 수정&#10;- namespace 변수 추가" />
     <MESSAGE value="chore(terraform): esc namespace output 추가" />
     <MESSAGE value="chore(terraform): es2 data 추가&#10;- ec2 postgresSQL 추가&#10;- ec2 redis 추가&#10;- ec2 mongo -&gt; AWS DocumentDB 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore(terraform): es2 data 추가&#10;- ec2 postgresSQL 추가&#10;- ec2 redis 추가&#10;- ec2 mongo -&gt; AWS DocumentDB 수정" />
+    <MESSAGE value="feat(terraform): 환경변수 추가&#10;- 20-security&#10;  - iam ecs 권한 수정&#10;    - secretsmanager, KMS 권한 추가&#10;- 50-compute&#10;  - ecs task definition 수정 &#10;    - 환경 변수 추가&#10;    - security manager 변수 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(terraform): 환경변수 추가&#10;- 20-security&#10;  - iam ecs 권한 수정&#10;    - secretsmanager, KMS 권한 추가&#10;- 50-compute&#10;  - ecs task definition 수정 &#10;    - 환경 변수 추가&#10;    - security manager 변수 추가" />
   </component>
 </project>
