@@ -20,3 +20,8 @@ variable "service_definitions" {
 
 variable "secret_names" { type = map(string) }
 variable "kms_key_arn"  { type = string }
+
+variable "vpc_cidr" {
+  description = "VPC CIDR 블록"
+  type        = string
+}

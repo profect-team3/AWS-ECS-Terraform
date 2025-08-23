@@ -5,6 +5,7 @@ variable "tags"    {
 }
 
 variable "vpc_id"     { type = string }
+variable "vpc_cidr" { type = string }
 
 variable "service_definitions" {
   description = "Per-service SG definition (ingress from ALB, and specific egress to DB/Cache)"

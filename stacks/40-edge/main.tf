@@ -15,14 +15,18 @@ data "terraform_remote_state" "security" {
 locals {
   name = "${var.project}-${var.env}"
   tags = merge(var.tags, { Project = var.project, Env = var.env })
+  region = var.region
+
   vpc_id = data.terraform_remote_state.network.outputs.vpc_id
   private_subnet_ids = data.terraform_remote_state.network.outputs.private_subnet_ids
+  public_subnet_ids = data.terraform_remote_state.network.outputs.public_subnet_ids
+  private_route_table_ids = data.terraform_remote_state.network.outputs.private_route_table_ids
+
   sg_alb_id = data.terraform_remote_state.security.outputs.sg_alb_id
-  # vpc_id = "vpc-xxxxxxxx"
-  # private_subnet_ids = ["subnet-xxxxxxxxxxxxxxxxx"]
+  vpc_endpoint_sg_id = data.terraform_remote_state.security.outputs.vpc_endpoint_sg_id
 }
 
-# 1) ALB (Private)
+# ALB
 module "alb" {
   source            = "../../modules/edge/alb"
   name              = local.name
@@ -35,11 +39,11 @@ module "alb" {
   tags              = var.tags
 }
 
-# 2) NLB (Private) → ALB 체인
+# NLB
 module "nlb" {
   source        = "../../modules/edge/nlb"
   name          = local.name
-  vpc_id            = local.vpc_id
+  vpc_id        = local.vpc_id
   subnet_ids    = local.private_subnet_ids
   listener_ports= [80]
   alb_arn       = module.alb.alb_arn
@@ -48,3 +52,13 @@ module "nlb" {
   depends_on = [module.alb]
 }
 
+# 2) NLB (Private) → ALB 체인
+module "endpoint" {
+  source        = "../../modules/edge/endpoint"
+  name          = local.name
+  vpc_id        = local.vpc_id
+  region        = local.region
+  subnet_ids    = local.private_subnet_ids
+  private_route_table_ids = local.private_route_table_ids
+  vpc_endpoint_sg_id = local.vpc_endpoint_sg_id
+}

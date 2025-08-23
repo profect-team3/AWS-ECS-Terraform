@@ -17,6 +17,7 @@ module "security_group" {
   tags     = local.tags
   vpc_id   = local.vpc_id
   service_definitions = var.service_definitions
+  vpc_cidr = var.vpc_cidr
 }
 
 module "iam" {

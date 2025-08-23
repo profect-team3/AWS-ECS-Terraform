@@ -23,6 +23,11 @@ output "sg_ecs_service_ids" {
   value       = module.security_group.sg_ecs_service_ids
 }
 
+output "vpc_endpoint_sg_id" {
+  description = "VPC Endpoint SG ID"
+  value       = module.security_group.vpc_endpoint_sg_id
+}
+
 output "ecs_task_execution_role_arn" {
   description = "ecs task execution role arn"
   value       = module.iam.ecs_task_execution_role_arn
