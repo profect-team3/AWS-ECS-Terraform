@@ -167,14 +167,26 @@ resource "aws_vpc_security_group_egress_rule" "ecs_to_redis" {
   referenced_security_group_id  = aws_security_group.redis.id
 }
 
-# ECS -> VPC Endpoints (HTTPS)
-resource "aws_vpc_security_group_egress_rule" "ecs_to_vpce_https" {
+# ALB -> ECS 인바운드
+resource "aws_security_group_rule" "alb_ecs_ingress" {
+  for_each                 = var.service_definitions
+  type                     = "ingress"
+  security_group_id        = aws_security_group.svc[each.key].id
+  from_port                = each.value.port
+  to_port                  = each.value.port
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.alb.id
+}
+
+# ECS -> VPCE (ECR/Logs/Secrets/KMS) 443
+resource "aws_vpc_security_group_egress_rule" "ecs_to_vpc_endpoint_https" {
   for_each                     = var.service_definitions
   security_group_id            = aws_security_group.svc[each.key].id
   ip_protocol                  = "tcp"
   from_port                    = 443
   to_port                      = 443
-  referenced_security_group_id = aws_security_group.vpc_endpoint_sg.id
+  cidr_ipv4   = "10.0.0.0/0"
+  # referenced_security_group_id = aws_security_group.vpc_endpoint_sg.id
 }
 
 # resource "aws_security_group_rule" "ecs_egress" {
@@ -186,16 +198,6 @@ resource "aws_vpc_security_group_egress_rule" "ecs_to_vpce_https" {
 #   protocol                      = each.value.egress.proto
 #   destination_security_group_id = local.core_sg_ids[each.value.egress.to]
 # }
-
-resource "aws_security_group_rule" "alb_ecs_ingress" {
-  for_each                 = var.service_definitions
-  type                     = "ingress"
-  security_group_id        = aws_security_group.svc[each.key].id
-  from_port                = each.value.port
-  to_port                  = each.value.port
-  protocol                 = "tcp"
-  source_security_group_id = aws_security_group.alb.id
-}
 
 # alb
 resource "aws_vpc_security_group_ingress_rule" "alb_ingress_80_cidr" {
