@@ -27,7 +27,6 @@ resource "aws_ecs_service" "svc" {
     rollback = true
   }
 
-
   network_configuration {
     subnets          = var.private_subnet_ids
     security_groups  = [var.sg_ecs_service_ids[each.key]]

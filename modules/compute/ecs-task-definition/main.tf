@@ -53,15 +53,6 @@ resource "aws_ecs_task_definition" "svc_task" {
         }
       }
 
-      # 여기서 ENTRYPOINT 오버라이드
-      entryPoint = [
-        "java",
-        "-Dspring.profiles.active=prod",
-        "-Dserver.port=8086",
-        "-jar",
-        "/app/application.jar"
-      ]
-
       # env
       environment = concat(
         [
