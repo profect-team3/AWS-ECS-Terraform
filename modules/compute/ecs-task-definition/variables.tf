@@ -31,7 +31,8 @@ variable "ecs_task_execution_role_arn" {
 
 variable "ecs_task_role_arns" {
   description = "ecs task role anrs"
-  type        = map(string)
+  type        = string
+  # type        = map(string)
 }
 
 # variable "repository_urls" {

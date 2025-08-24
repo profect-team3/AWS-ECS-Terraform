@@ -24,7 +24,8 @@ resource "aws_ecs_task_definition" "svc_task" {
   memory       = each.value.memory
 
   execution_role_arn = var.ecs_task_execution_role_arn
-  task_role_arn      = var.ecs_task_role_arns[each.key]
+  task_role_arn      = var.ecs_task_role_arns
+  # task_role_arn      = var.ecs_task_role_arns[each.key]
 
   runtime_platform {
     operating_system_family = "LINUX"
@@ -51,6 +52,15 @@ resource "aws_ecs_task_definition" "svc_task" {
           awslogs-stream-prefix = each.key
         }
       }
+
+      # 여기서 ENTRYPOINT 오버라이드
+      entryPoint = [
+        "java",
+        "-Dspring.profiles.active=prod",
+        "-Dserver.port=8086",
+        "-jar",
+        "/app/application.jar"
+      ]
 
       # env
       environment = concat(
