@@ -185,7 +185,7 @@ resource "aws_vpc_security_group_egress_rule" "ecs_to_vpc_endpoint_https" {
   ip_protocol                  = "tcp"
   from_port                    = 443
   to_port                      = 443
-  cidr_ipv4   = "10.0.0.0/0"
+  cidr_ipv4                    = "0.0.0.0/0"
   # referenced_security_group_id = aws_security_group.vpc_endpoint_sg.id
 }
 
