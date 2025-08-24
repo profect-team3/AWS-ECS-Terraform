@@ -34,7 +34,8 @@ resource "aws_iam_policy" "ecs_task_execution_policy" {
         Action = [
           "ecr:GetAuthorizationToken",
           "ecr:BatchCheckLayerAvailability",
-          "ecr:BatchGetImage"
+          "ecr:BatchGetImage",
+          "ecr:GetDownloadUrlForLayer"
         ],
         Resource = "*"
       },

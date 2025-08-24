@@ -15,6 +15,8 @@ variable "service_definitions" {
     }))
     cpu    = string
     memory = string
+    desired_count          = number
+    enable_execute_command = bool
   }))
 }
 

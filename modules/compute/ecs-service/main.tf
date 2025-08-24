@@ -4,12 +4,29 @@ resource "aws_ecs_service" "svc" {
   name                    = "${var.name}-${each.key}"
   cluster                 = var.cluster_arn
   task_definition         = var.task_definition_arns[each.key]
-  # desired_count           = each.value.desired_count
-  # enable_execute_command  = lookup(each.value, "enable_execute_command", true)
-  launch_type             = "FARGATE"
-  # platform_version        = lookup(each.value, "platform_version", "LATEST")
-  # propagate_tags          = lookup(each.value, "propagate_tags_from_service", true) ? "SERVICE" : "NONE"
-  health_check_grace_period_seconds = lookup(each.value, "health_check_grace_period_seconds", 30)
+
+  desired_count          = each.value.desired_count
+  enable_execute_command = each.value.enable_execute_command
+
+  # 배포/안정화 관련 권장 옵션
+  # wait_for_steady_state  = coalesce(try(each.value.wait_for_steady_state, null), false)
+  # force_new_deployment   = coalesce(try(each.value.force_new_deployment, null), false)
+
+  launch_type = "FARGATE"
+
+  # ALB 헬스체크 유예(앱 초기화 여유)
+  # health_check_grace_period_seconds = coalesce(try(each.value.health_check_grace_period_seconds, null), 60)
+
+  # 롤링 업데이트 파라미터
+  # deployment_minimum_healthy_percent = coalesce(try(each.value.min_healthy_percent, null), 50)
+  # deployment_maximum_percent         = coalesce(try(each.value.max_percent, null), 200)
+
+  # 배포 실패 시 자동 롤백 권장
+  deployment_circuit_breaker {
+    enable   = true
+    rollback = true
+  }
+
 
   network_configuration {
     subnets          = var.private_subnet_ids
