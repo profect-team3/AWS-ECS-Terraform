@@ -65,7 +65,7 @@ resource "aws_ecs_task_definition" "svc_task" {
       secrets = [
         for key_name in lookup(each.value, "secret_keys", []) : {
           name      = key_name
-          valueFrom = data.aws_secretsmanager_secret.this[key_name].arn
+          valueFrom = "${data.aws_secretsmanager_secret.this[key_name].arn}:${key_name}::"
         }
       ]
     }
